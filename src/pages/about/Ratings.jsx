@@ -17,10 +17,11 @@ import avatar7 from "../../img/portrait/avatar7.jpg";
 import ArrowLefttIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 const Ratings = () => {
-  const isMobile = useMediaQuery("(max-width: 769px)");
-  const centerSlidePercentage = isMobile ? 100 / 1 : 100 / 3;
+  const isTablet = useMediaQuery("(max-width: 769px)");
+  const isSmallTablet = useMediaQuery("(max-width:715px)");
+  const centerSlidePercentage = isTablet ? 100 / 1 : 100 / 3;
   const boxStyles = {
-    width: isMobile ? "100%" : "98%",
+    width: isTablet ? "100%" : "98%",
     height: "300px",
     background: "rgba(190, 202, 196, 0.66)",
     borderRadius: "16px",
@@ -46,7 +47,7 @@ const Ratings = () => {
       <ReactCarousel
         centerMode
         centerSlidePercentage={centerSlidePercentage}
-        infiniteLoop={true}
+        infiniteLoop={false}
         showStatus={false}
         showThumbs={false}
         showIndicators={false}
@@ -253,7 +254,11 @@ const Ratings = () => {
           <Avatar
             alt="Akon Young"
             src={avatar6}
-            sx={{ width: 500, height: 500, mt: "16px" }}
+            sx={{
+              width: isSmallTablet ? "175px" : "500px",
+              height: isSmallTablet ? "175px" : "500px",
+              mt: "16px",
+            }}
           />
         </Box>
       </Box>
@@ -302,7 +307,11 @@ const Ratings = () => {
           <Avatar
             alt="Ashley White"
             src={avatar7}
-            sx={{ width: 500, height: 500, mt: "16px" }}
+            sx={{
+              width: isSmallTablet ? "175px" : "500px",
+              height: isSmallTablet ? "175px" : "500px",
+              mt: "16px",
+            }}
           />
         </Box>
       </Box>
