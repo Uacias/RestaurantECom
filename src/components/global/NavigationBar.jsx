@@ -54,7 +54,7 @@ const NavigationBar = () => {
               sx={{ display: isMobile ? "block" : "none" }}
               onClick={() => setIsDrawerOpen(true)}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: "28px" }} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Home">
@@ -110,7 +110,7 @@ const NavigationBar = () => {
               }}
             >
               <Badge badgeContent={basket.length} showZero max={99}>
-                <ShoppingBasketIcon />
+                <ShoppingBasketIcon fontSize="28px" />
               </Badge>
             </IconButton>
           </Tooltip>
@@ -128,14 +128,14 @@ const NavigationBar = () => {
             color="inherit"
             aria-label="Hide"
             onClick={() => setIsDrawerOpen(false)}
-            sx={{ p: 2 }}
+            sx={{ p: 1 }}
           >
             <ArrowBackIcon sx={{ fontSize: 32 }} />
           </IconButton>
 
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Box
-              sx={{ p: 2, borderBottom: "1px solid black", display: "flex" }}
+              sx={{ p: 1, borderBottom: "1px solid black", display: "flex" }}
               onClick={() => {
                 navigate("About");
                 setIsDrawerOpen(false);
@@ -149,7 +149,7 @@ const NavigationBar = () => {
               <Typography variant="h4"> About</Typography>
             </Box>
             <Box
-              sx={{ p: 2, borderBottom: "1px solid black", display: "flex" }}
+              sx={{ p: 1, borderBottom: "1px solid black", display: "flex" }}
               onClick={() => {
                 navigate("Contact");
                 setIsDrawerOpen(false);

@@ -1,9 +1,9 @@
-import { Box, Typography, IconButton, Avatar, Button } from "@mui/material";
+import { Box, Typography, IconButton, Button, Drawer } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromBasket, setIsBasketVisible } from "../../state";
 import { decreaseCount, increaseCount } from "../../state";
@@ -19,151 +19,210 @@ const BasketMenu = () => {
     return (price += item.attributes.price * item.count);
   }, 0);
 
+  const truncateString = (str) => {
+    return str.length > 35 ? str.slice(0, 35) + "..." : str;
+  };
+
   return (
-    <Box
-      display={isBasketVisible ? "block" : "none"}
-      position="fixed"
-      zIndex={5}
-      width="100%"
-      height="100%"
-      left="0"
-      top="0"
-      overflow="auto"
-      backgroundColor="rgba(0, 0, 0, 0.5)"
+    <Drawer
+      anchor="right"
+      open={isBasketVisible}
+      onClose={() => {
+        dispatch(setIsBasketVisible());
+      }}
     >
-      <Box
-        display="flex"
-        flexDirection="column"
-        position="fixed"
-        width="max(30%, 325px)"
-        height="100%"
-        top="0"
-        right="0"
-        overflow="auto"
-        padding="16px"
-        backgroundColor="rgba(0,0,0, 0.95)"
-      >
+      <Box p={2} width="320px" role="presentation">
         {/* TOP */}
         <Box
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          borderBottom="1px solid white"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderBottom: "1px solid black",
+          }}
         >
-          <Typography variant="h3" color="white">
-            Your Shopping Basket
-          </Typography>
-          <IconButton
-            caria-label="close"
-            size="large"
-            onClick={() => {
-              dispatch(setIsBasketVisible({}));
+          <Typography
+            variant="h4"
+            sx={{
+              p: 1,
             }}
           >
-            <CloseIcon sx={{ color: "white" }} />
+            Your Basket
+          </Typography>
+          <IconButton
+            color="inherit"
+            aria-label="Hide"
+            onClick={() => {
+              dispatch(setIsBasketVisible());
+            }}
+            sx={{
+              p: 1,
+            }}
+          >
+            <ArrowForwardIcon sx={{ fontSize: 32 }} />
           </IconButton>
         </Box>
-        {/* TOP END */}
 
         {/* INDIVIDUAL DISH ORDER */}
         <Box>
           {basket.map((dish) => {
             return (
-              // wrapper for individual order
               <Box
-                key={`${dish.id}_${dish.attributes.name}`}
                 sx={{
-                  p: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  borderBottom: "1px solid white",
+                  mt: 3,
+                  border: "1px solid black",
+                  borderRadius: "16px",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundImage: `url(http://localhost:1337${dish?.attributes?.image?.data?.attributes?.formats?.medium?.url})`,
                 }}
               >
-                {/* Image of product */}
-                <Box>
-                  <Avatar
-                    alt={`${dish.attributes.name}`}
-                    sx={{ width: 56, height: 56 }}
-                    src={`http://localhost:1337${dish?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-                  />
-                </Box>
-                {/* Name of product */}
-                {/* TODO: WHAT IF NAME 2 LONG */}
-                <Box>
-                  <Typography variant="h5" fontWeight="bold" color="white">
-                    {dish.attributes.name}
+                <Box
+                  sx={{
+                    backgroundColor: "rgba(255,255,255,0.63)",
+                    borderRadius: "16px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      marginInline: 4,
+                      pt: 2,
+
+                      textShadow: "1px 1px 2px #000000",
+                    }}
+                    variant="h5"
+                  >
+                    {truncateString(dish.attributes.name)}
                   </Typography>
-                </Box>
-                <Box>
-                  <Tooltip title="Decrease">
-                    <IconButton
-                      sx={{ color: "rgba(255,255,255,0.88)" }}
-                      onClick={() => {
-                        dispatch(decreaseCount({ id: dish.id }));
+                  <Box
+                    key={`${dish.id}_${dish.attributes.name}`}
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        //TODO: THINK
+                        // backgroundColor: "rgba(0,0,0,.3)",
+                        borderRadius: "6px",
                       }}
                     >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
-                <Box>
-                  <Typography variant="h5" color="white" fontWeight="bold">
-                    {dish.count}
+                      <Box>
+                        <Tooltip title="Decrease">
+                          <IconButton
+                            sx={{ background: "rgba(0,0,0,.3)" }}
+                            onClick={() => {
+                              dispatch(decreaseCount({ id: dish.id }));
+                            }}
+                          >
+                            <RemoveIcon
+                              sx={{
+                                fontSize: 26,
+                              }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h5"
+                          fontWeight="bold"
+                          sx={{ paddingInline: 1, fontSize: "26px" }}
+                        >
+                          {dish.count}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Tooltip title="Increase">
+                          <IconButton
+                            sx={{ background: "rgba(0,0,0,.3)" }}
+                            onClick={() => {
+                              dispatch(increaseCount({ id: dish.id }));
+                            }}
+                          >
+                            <AddIcon sx={{ fontSize: 26 }} />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    </Box>
+                    <Box>
+                      <Tooltip title="Remove All">
+                        <IconButton
+                          sx={{
+                            backgroundColor: "rgba(0,0,0, .3)",
+                            borderRadius: "50%",
+                          }}
+                          onClick={() => {
+                            dispatch(removeFromBasket({ id: dish.id }));
+                          }}
+                        >
+                          <DeleteIcon
+                            sx={{
+                              fontSize: 26,
+                              color: "rgb(255, 102, 102)",
+                            }}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
+                  </Box>
+                  <Typography
+                    variant="h4"
+                    textAlign={"center"}
+                    sx={{ textShadow: "1px 1px 2px #000000" }}
+                  >
+                    Subtotal
                   </Typography>
-                </Box>
-                <Box>
-                  <Tooltip title="Increase">
-                    <IconButton
-                      sx={{ color: "rgba(255,255,255,0.88)" }}
-                      onClick={() => {
-                        dispatch(increaseCount({ id: dish.id }));
-                      }}
-                    >
-                      <AddIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
-                <Box>
-                  <Tooltip title="Remove All">
-                    <IconButton
-                      sx={{ color: "rgba(255,255,255,0.88)" }}
-                      onClick={() => {
-                        dispatch(removeFromBasket({ id: dish.id }));
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
+                  <Typography
+                    variant="h4"
+                    textAlign={"center"}
+                    sx={{ pb: 2, fontWeight: "bold" }}
+                  >
+                    {`$${(dish.attributes.price * dish.count).toFixed(2)}`}
+                  </Typography>
                 </Box>
               </Box>
             );
           })}
         </Box>
-        {/* BOTTOM - USER ACTIONS */}
-
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Typography variant="h5" color="white" mt={6} fontWeight="bold">
-            Total price: {`$${total.toFixed(2)}`}
-          </Typography>
-          <Button
-            sx={{ mt: "16px" }}
-            onClick={() => {
-              dispatch(setIsBasketVisible({}));
-              navigate("/checkout");
-            }}
+        {/* CHECKOUT BUTTON*/}
+        {basket.length > 0 ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
           >
-            Checkout
-          </Button>
-        </Box>
+            <Typography variant="h4" mt={6} fontWeight="bold">
+              Total price
+            </Typography>
+            <Typography variant="h4" mt={1} fontWeight="bold">
+              {`$${total.toFixed(2)}`}
+            </Typography>
+            <Button
+              sx={{ mt: "16px", fontWeight: "bold", fontSize: 16 }}
+              onClick={() => {
+                dispatch(setIsBasketVisible({}));
+                navigate("/checkout");
+              }}
+            >
+              Checkout
+            </Button>
+          </Box>
+        ) : (
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h5">
+              Nothing in your basket yet. Discover our fantastic selection!
+            </Typography>
+          </Box>
+        )}
       </Box>
-    </Box>
+    </Drawer>
   );
 };
 
