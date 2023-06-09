@@ -7,8 +7,8 @@ import Home from "./pages/home/Home";
 import AboutUs from "./pages/about/AboutUs";
 import ContactHours from "./pages/contact/ContactHours";
 import Footer from "./components/global/Footer";
-// import PrivacyPolicy from "./pages/privacyPolicy/privacyPolicy";
-// import TermsConditions from "./pages/termsConditions/termsConditions";
+import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
+import TermsConditions from "./pages/terms/TermsConditions";
 
 const ScrollTop = () => {
   const { pathname } = useLocation();
@@ -29,8 +29,8 @@ function App() {
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/About" element={<AboutUs />} />
           <Route path="/Contact" element={<ContactHours />} />
-          {/* <Route path ="/PrivacyPolicy" element={<PrivacyPolicy />} />
-          <Route path ="/TermsAndConditions" element={<TermsConditions />} /> */}
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/TermsAndConditions" element={<TermsConditions />} />
         </Routes>
         <BasketMenu />
         <Footer />
