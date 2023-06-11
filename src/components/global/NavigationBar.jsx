@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoIcon from "@mui/icons-material/Info";
 import CallIcon from "@mui/icons-material/Call";
+import SecurityIcon from "@mui/icons-material/Security";
+import ArticleIcon from "@mui/icons-material/Article";
+import bgDrawer from "../../img/drawer/bg-drawer.jpg";
+
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import {
   Badge,
   Box,
+  Button,
   Drawer,
   IconButton,
   Tooltip,
@@ -23,7 +29,22 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basket);
   const isMobile = useMediaQuery("(max-width:768px)");
+  const isSmallMobile = useMediaQuery("(max-width:334px");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const menuItemStyle = {
+    p: 1,
+    mb: 2,
+    borderBottom: "1px solid black",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  const menuButtonStyle = {
+    fontSize: "17px",
+    fontWeight: "bold",
+    color: "rgb(0,0,0)",
+  };
 
   return (
     <>
@@ -57,7 +78,7 @@ const NavigationBar = () => {
               <MenuIcon sx={{ fontSize: "28px" }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Home">
+          <Tooltip title="Home" display={isSmallMobile ? "none" : "block"}>
             <Typography
               variant="h5"
               sx={{ "&:hover": { cursor: "pointer" } }}
@@ -65,6 +86,17 @@ const NavigationBar = () => {
             >
               Le Nemours
             </Typography>
+          </Tooltip>
+          <Tooltip title="Home">
+            <IconButton
+              size="large"
+              color="inherit"
+              aria-label="home"
+              sx={{ display: isSmallMobile ? "block" : "none" }}
+              onClick={() => navigate("")}
+            >
+              <HomeIcon sx={{ fontSize: "28px" }} />
+            </IconButton>
           </Tooltip>
         </Box>
 
@@ -79,7 +111,40 @@ const NavigationBar = () => {
             <Typography
               variant="h5"
               sx={{
-                "&:hover": { cursor: "pointer" },
+                "&:hover": {
+                  cursor: "pointer",
+                  borderBottom: "1px solid white",
+                },
+                display: isMobile ? "none" : "block",
+              }}
+              onClick={() => navigate("/TermsAndConditions")}
+            >
+              Terms & Conditions
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{
+                "&:hover": {
+                  cursor: "pointer",
+                  borderBottom: "1px solid white",
+                },
+                display: isMobile ? "none" : "block",
+              }}
+              onClick={() => navigate("/PrivacyPolicy")}
+            >
+              Privacy Policy
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{
+                "&:hover": {
+                  cursor: "pointer",
+                  borderBottom: "1px solid white",
+                },
                 display: isMobile ? "none" : "block",
               }}
               onClick={() => navigate("/About")}
@@ -91,7 +156,10 @@ const NavigationBar = () => {
             <Typography
               variant="h5"
               sx={{
-                "&:hover": { cursor: "pointer" },
+                "&:hover": {
+                  cursor: "pointer",
+                  borderBottom: "1px solid white",
+                },
                 display: isMobile ? "none" : "block",
               }}
               onClick={() => navigate("/Contact")}
@@ -123,44 +191,160 @@ const NavigationBar = () => {
           setIsDrawerOpen(false);
         }}
       >
-        <Box p={2} width="320px" role="presentation">
-          <IconButton
-            color="inherit"
-            aria-label="Hide"
-            onClick={() => setIsDrawerOpen(false)}
-            sx={{ p: 1 }}
+        <Box
+          sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url(${bgDrawer})`,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              background: "rgba(255,255,255,.7)",
+            }}
           >
-            <ArrowBackIcon sx={{ fontSize: 32 }} />
-          </IconButton>
+            <Box p={2} width="320px" role="presentation">
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <IconButton
+                  color="inherit"
+                  aria-label="Hide"
+                  onClick={() => setIsDrawerOpen(false)}
+                  sx={{ p: 1 }}
+                >
+                  <ArrowBackIcon sx={{ fontSize: 32 }} />
+                </IconButton>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    p: 1,
+                  }}
+                >
+                  Menu
+                </Typography>
+              </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box
-              sx={{ p: 1, borderBottom: "1px solid black", display: "flex" }}
-              onClick={() => {
-                navigate("About");
-                setIsDrawerOpen(false);
-              }}
-            >
-              <InfoIcon
-                sx={{ fontSize: 32, marginRight: 2 }}
-                color="inherit"
-                aria-label="Contact"
-              />
-              <Typography variant="h4"> About</Typography>
-            </Box>
-            <Box
-              sx={{ p: 1, borderBottom: "1px solid black", display: "flex" }}
-              onClick={() => {
-                navigate("Contact");
-                setIsDrawerOpen(false);
-              }}
-            >
-              <CallIcon
-                sx={{ fontSize: 32, marginRight: 2 }}
-                color="inherit"
-                aria-label="Contact"
-              />
-              <Typography variant="h4"> Contact</Typography>
+              <Box sx={{ display: "flex", flexDirection: "column", mt: 3 }}>
+                <Box
+                  sx={{
+                    ...menuItemStyle,
+                  }}
+                  onClick={() => {
+                    navigate("");
+                    setIsDrawerOpen(false);
+                  }}
+                >
+                  <HomeIcon
+                    sx={{ fontSize: 32, marginRight: 2 }}
+                    color="inherit"
+                    aria-label="Contact"
+                  />
+                  <Button
+                    sx={{
+                      ...menuButtonStyle,
+                    }}
+                  >
+                    Home
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    ...menuItemStyle,
+                  }}
+                  onClick={() => {
+                    navigate("About");
+                    setIsDrawerOpen(false);
+                  }}
+                >
+                  <InfoIcon
+                    sx={{ fontSize: 32, marginRight: 2 }}
+                    color="inherit"
+                    aria-label="Contact"
+                  />
+                  <Button
+                    sx={{
+                      ...menuButtonStyle,
+                    }}
+                  >
+                    About
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    ...menuItemStyle,
+                  }}
+                  onClick={() => {
+                    navigate("Contact");
+                    setIsDrawerOpen(false);
+                  }}
+                >
+                  <CallIcon
+                    sx={{ fontSize: 32, marginRight: 2 }}
+                    color="inherit"
+                    aria-label="Contact"
+                  />
+                  <Button
+                    sx={{
+                      ...menuButtonStyle,
+                    }}
+                  >
+                    Contact
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    ...menuItemStyle,
+                  }}
+                  onClick={() => {
+                    navigate("TermsAndConditions");
+                    setIsDrawerOpen(false);
+                  }}
+                >
+                  <ArticleIcon
+                    sx={{ fontSize: 32, marginRight: 2 }}
+                    color="inherit"
+                    aria-label="Terms & Conditions"
+                  />
+                  <Button
+                    sx={{
+                      ...menuButtonStyle,
+                    }}
+                  >
+                    Terms & Conditions
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    ...menuItemStyle,
+                  }}
+                  onClick={() => {
+                    navigate("PrivacyPolicy");
+                    setIsDrawerOpen(false);
+                  }}
+                >
+                  <SecurityIcon
+                    sx={{ fontSize: 32, marginRight: 2 }}
+                    color="inherit"
+                    aria-label="Contact"
+                  />
+                  <Button
+                    sx={{
+                      ...menuButtonStyle,
+                    }}
+                  >
+                    Privacy Policy
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </Box>

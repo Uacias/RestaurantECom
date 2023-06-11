@@ -17,15 +17,7 @@ const Dish = ({ dish, width }) => {
   const [count, setCount] = useState(1);
   const [hover, setHover] = useState(false);
   const { name, price, image } = dish.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          small: { url },
-        },
-      },
-    },
-  } = image;
+  const url = image?.data?.attributes?.formats?.small?.url;
 
   return (
     <Box width={width}>
