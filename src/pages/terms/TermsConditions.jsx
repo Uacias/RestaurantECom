@@ -16,7 +16,7 @@ const TermsConditions = () => {
     >
       <Box
         sx={{
-          background: "rgba(255,255,255,.6)",
+          background: "rgba(255,255,255,.7)",
           paddingBlock: 10,
           paddingInline: "12.5%",
         }}
@@ -27,13 +27,12 @@ const TermsConditions = () => {
         >
           Terms & Conditions
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 8 }}>
-          <strong>Welcome</strong> to our service!
-          <br /> Before using our website, please read the following{" "}
-          <strong>terms and conditions:</strong>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 8 }}>
+          Welcome to our service! Before using our website, please read the
+          following terms and conditions:
         </Typography>
         <Typography
-          variant={isMobile ? "h5" : "h4"}
+          variant={isMobile ? "h6" : "h5"}
           component="ol"
           sx={{ mt: 7 }}
         >
@@ -56,10 +55,10 @@ const TermsConditions = () => {
             company.
           </li>
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 7 }}>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 7 }}>
           Thank you for using our service. If you have any questions or
           concerns, please contact us.
-        </Typography>s
+        </Typography>
       </Box>
     </Box>
   );

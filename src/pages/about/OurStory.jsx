@@ -1,11 +1,16 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import imgTwo from "../../img/other/josh-hild-v4LQkXJPK0o-unsplash.jpg";
 import imgOne from "../../img/other/stefan-c-asafti-9p6pFEwq-wI-unsplash.jpg";
 import imgThree from "../../img/other/sebastian-coman-photography-cQbOSRpElxw-unsplash.jpg";
 const OurStory = () => {
+  const isMobile = useMediaQuery("(max-width: 425px)");
+
   return (
-    <Box width="75%" margin="40px auto" sx={{ textAlign: "center" }}>
-      <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+    <Box
+      margin="40px auto"
+      sx={{ textAlign: "center", width: isMobile ? "100%" : "75%" }}
+    >
+      <Typography variant="h2" sx={{ fontWeight: "bold", mb: 3 }}>
         Our Story
       </Typography>
       <Box margin="0 auto" width="100%" padding={2}>
@@ -17,7 +22,14 @@ const OurStory = () => {
           <Box>
             <img src={imgOne} alt="test" width="90%" />
           </Box>
-          <Box marginY={{ lg: "16px", xl: "0" }} maxWidth="90%" marginX="auto">
+          <Box
+            marginY={{
+              lg: "16px",
+              xl: "0",
+              maxWidth: isMobile ? "100%" : "90%",
+            }}
+            marginX="auto"
+          >
             <Typography
               variant="h4"
               fontWeight="bold"
@@ -25,7 +37,7 @@ const OurStory = () => {
             >
               History
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" textAlign={"left"}>
               La Nemours is a charming French restaurant located in the heart of
               the city. The story of La Nemours began when the owner, a French
               chef, fell in love with the culinary culture of his home country.
@@ -48,7 +60,7 @@ const OurStory = () => {
             >
               Fresh French Flavors
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" textAlign={"left"}>
               At La Nemours, we take pride in serving only the freshest
               ingredients to create delicious French cuisine. Our menu features
               classic dishes made with high-quality, locally sourced
@@ -70,7 +82,7 @@ const OurStory = () => {
             >
               Passionate Professionals
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" textAlign={"left"}>
               At La Nemours, our team of skilled cooks and friendly staff are
               dedicated to providing exceptional service and delicious French
               food. With years of experience and a passion for French cooking
