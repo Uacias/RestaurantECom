@@ -41,14 +41,13 @@ const Footer = () => {
           p: 4,
         }}
       >
-        <Box width="75%" margin="40px auto">
+        <Box width="75%" margin="0 auto">
           {/* SOCIALS SECTION */}
           <Box>
             <Typography
-              variant={"h1"}
               textAlign={"center"}
               sx={{
-                fontSize: isMobile ? "48px" : "96px",
+                fontSize: isMobile ? "36px" : "64px",
                 textShadow: " 2px 2px 5px green",
               }}
             >
@@ -58,7 +57,8 @@ const Footer = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-around",
-                flexDirection: isMobile ? "column" : "row",
+                flexWrap: "wrap",
+                flexDirection: "row",
               }}
             >
               <Tooltip
@@ -74,7 +74,7 @@ const Footer = () => {
                 >
                   <FacebookIcon
                     sx={{
-                      fontSize: isMobile ? 56 : 96,
+                      fontSize: isMobile ? 48 : 72,
                       color: "rgba(242, 238, 237, .77)",
                     }}
                   />
@@ -94,7 +94,7 @@ const Footer = () => {
                 >
                   <InstagramIcon
                     sx={{
-                      fontSize: isMobile ? 56 : 96,
+                      fontSize: isMobile ? 48 : 72,
                       color: "rgba(242, 238, 237, .77)",
                     }}
                   />
@@ -113,7 +113,7 @@ const Footer = () => {
                 >
                   <TwitterIcon
                     sx={{
-                      fontSize: isMobile ? 56 : 96,
+                      fontSize: isMobile ? 48 : 72,
                       color: "rgba(242, 238, 237, .77)",
                     }}
                   />
@@ -132,7 +132,7 @@ const Footer = () => {
                 >
                   <TelegramIcon
                     sx={{
-                      fontSize: isMobile ? 56 : 96,
+                      fontSize: isMobile ? 48 : 72,
                       color: "rgba(242, 238, 237, .77)",
                     }}
                   />
@@ -151,7 +151,7 @@ const Footer = () => {
                 >
                   <YouTubeIcon
                     sx={{
-                      fontSize: isMobile ? 56 : 96,
+                      fontSize: isMobile ? 48 : 72,
                       color: "rgba(242, 238, 237, .77)",
                     }}
                   />
