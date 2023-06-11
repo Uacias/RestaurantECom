@@ -29,7 +29,7 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basket);
   const isMobile = useMediaQuery("(max-width:768px)");
-  const isSmallMobile = useMediaQuery("(max-width:334px");
+  const isSmallMobile = useMediaQuery("(max-width:334px)");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const menuItemStyle = {
@@ -44,6 +44,11 @@ const NavigationBar = () => {
     fontSize: "17px",
     fontWeight: "bold",
     color: "rgb(0,0,0)",
+  };
+
+  const [activeLink, setActiveLink] = useState("");
+  const activeLinkStyle = {
+    borderBottom: "1px solid white",
   };
 
   return (
@@ -114,10 +119,15 @@ const NavigationBar = () => {
                 "&:hover": {
                   cursor: "pointer",
                   borderBottom: "1px solid white",
+                  ...(activeLink === "/TermsAndConditions" && activeLinkStyle),
                 },
                 display: isMobile ? "none" : "block",
+                ...(activeLink === "/TermsAndConditions" && activeLinkStyle),
               }}
-              onClick={() => navigate("/TermsAndConditions")}
+              onClick={() => {
+                navigate("/TermsAndConditions");
+                setActiveLink("/TermsAndConditions");
+              }}
             >
               Terms & Conditions
             </Typography>
@@ -129,10 +139,15 @@ const NavigationBar = () => {
                 "&:hover": {
                   cursor: "pointer",
                   borderBottom: "1px solid white",
+                  ...(activeLink === "/PrivacyPolicy" && activeLinkStyle),
                 },
                 display: isMobile ? "none" : "block",
+                ...(activeLink === "/PrivacyPolicy" && activeLinkStyle),
               }}
-              onClick={() => navigate("/PrivacyPolicy")}
+              onClick={() => {
+                navigate("/PrivacyPolicy");
+                setActiveLink("/PrivacyPolicy");
+              }}
             >
               Privacy Policy
             </Typography>
@@ -144,10 +159,15 @@ const NavigationBar = () => {
                 "&:hover": {
                   cursor: "pointer",
                   borderBottom: "1px solid white",
+                  ...(activeLink === "/About" && activeLinkStyle),
                 },
                 display: isMobile ? "none" : "block",
+                ...(activeLink === "/About" && activeLinkStyle),
               }}
-              onClick={() => navigate("/About")}
+              onClick={() => {
+                navigate("/About");
+                setActiveLink("/About");
+              }}
             >
               About
             </Typography>
@@ -159,10 +179,15 @@ const NavigationBar = () => {
                 "&:hover": {
                   cursor: "pointer",
                   borderBottom: "1px solid white",
+                  ...(activeLink === "/Contact" && activeLinkStyle),
                 },
                 display: isMobile ? "none" : "block",
+                ...(activeLink === "/Contact" && activeLinkStyle),
               }}
-              onClick={() => navigate("/Contact")}
+              onClick={() => {
+                navigate("/Contact");
+                setActiveLink("/Contact");
+              }}
             >
               Contact
             </Typography>
