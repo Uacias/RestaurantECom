@@ -1,4 +1,10 @@
-import { Box, Typography, IconButton, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
@@ -7,6 +13,7 @@ import { addToBasket } from "../state";
 
 const Dish = ({ dish, width }) => {
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [count, setCount] = useState(1);
   const [hover, setHover] = useState(false);
   const { name, price, image } = dish.attributes;
@@ -36,7 +43,7 @@ const Dish = ({ dish, width }) => {
         />
 
         <Box
-          display={hover ? "block" : "none"}
+          display={isMobile || hover ? "block" : "none"}
           backgroundColor="rgba(255,255,255,0.77)"
           position="absolute"
           bottom="5%"
