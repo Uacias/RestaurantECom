@@ -12,6 +12,8 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import {
   Badge,
   Box,
+  Switch,
+  FormControlLabel,
   Button,
   Drawer,
   IconButton,
@@ -24,6 +26,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsBasketVisible } from "../../state";
 import { useState } from "react";
 
+import { useTranslation } from "react-i18next";
+
 const NavigationBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,6 +35,14 @@ const NavigationBar = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const isSmallMobile = useMediaQuery("(max-width:334px)");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("");
+
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const { t, i18n } = useTranslation("", { lng: selectedLanguage });
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+    i18n.changeLanguage(language);
+  };
 
   const activeLinkStyle = {
     borderBottom: "1px solid white",
@@ -49,8 +61,6 @@ const NavigationBar = () => {
     fontWeight: "bold",
     color: "rgb(0,0,0)",
   };
-
-  const [activeLink, setActiveLink] = useState("");
 
   return (
     <>
@@ -73,7 +83,7 @@ const NavigationBar = () => {
           alignItems="center"
           columnGap="20px"
         >
-          <Tooltip title="Menu">
+          <Tooltip title={t("navigation.tooltips.home")}>
             <IconButton
               size="large"
               color="inherit"
@@ -84,7 +94,10 @@ const NavigationBar = () => {
               <MenuIcon sx={{ fontSize: "28px" }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Home" display={isSmallMobile ? "none" : "block"}>
+          <Tooltip
+            title={t("navigation.tooltips.home")}
+            display={isSmallMobile ? "none" : "block"}
+          >
             <Typography
               variant="h5"
               sx={{ "&:hover": { cursor: "pointer" } }}
@@ -133,7 +146,7 @@ const NavigationBar = () => {
                 setActiveLink("/TermsAndConditions");
               }}
             >
-              Terms & Conditions
+              {t("navigation.termsConditions")}
             </Typography>
           </Box>
           <Box>
@@ -153,7 +166,7 @@ const NavigationBar = () => {
                 setActiveLink("/PrivacyPolicy");
               }}
             >
-              Privacy Policy
+              {t("navigation.privacyPolicy")}
             </Typography>
           </Box>
           <Box>
@@ -173,7 +186,7 @@ const NavigationBar = () => {
                 setActiveLink("/About");
               }}
             >
-              About
+              {t("navigation.about")}
             </Typography>
           </Box>
           <Box>
@@ -193,11 +206,11 @@ const NavigationBar = () => {
                 setActiveLink("/Contact");
               }}
             >
-              Contact
+              {t("navigation.contact")}
             </Typography>
           </Box>
 
-          <Tooltip title="Basket">
+          <Tooltip title={t("navigation.tooltips.basket")}>
             <IconButton
               size="large"
               color="inherit"
@@ -210,6 +223,22 @@ const NavigationBar = () => {
                 <ShoppingBasketIcon fontSize="28px" />
               </Badge>
             </IconButton>
+          </Tooltip>
+          <Tooltip title={t("navigation.tooltips.switchLanguage")}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={selectedLanguage === "pl"}
+                  onChange={() =>
+                    handleLanguageChange(
+                      selectedLanguage === "pl" ? "en" : "pl"
+                    )
+                  }
+                  inputProps={{ "aria-label": "Switch language" }}
+                />
+              }
+              label={selectedLanguage.toUpperCase()}
+            />
           </Tooltip>
         </Box>
       </Box>
@@ -258,7 +287,7 @@ const NavigationBar = () => {
                     p: 1,
                   }}
                 >
-                  Menu
+                  {t("navigation.menu")}
                 </Typography>
               </Box>
 
@@ -282,7 +311,7 @@ const NavigationBar = () => {
                       ...menuButtonStyle,
                     }}
                   >
-                    Home
+                    {t("navigation.tooltips.home")}
                   </Button>
                 </Box>
                 <Box
@@ -304,7 +333,7 @@ const NavigationBar = () => {
                       ...menuButtonStyle,
                     }}
                   >
-                    About
+                    {t("navigation.about")}
                   </Button>
                 </Box>
                 <Box
@@ -326,7 +355,7 @@ const NavigationBar = () => {
                       ...menuButtonStyle,
                     }}
                   >
-                    Contact
+                    {t("navigation.contact")}
                   </Button>
                 </Box>
                 <Box
@@ -348,7 +377,7 @@ const NavigationBar = () => {
                       ...menuButtonStyle,
                     }}
                   >
-                    Terms & Conditions
+                    {t("navigation.termsConditions")}
                   </Button>
                 </Box>
                 <Box
@@ -370,7 +399,7 @@ const NavigationBar = () => {
                       ...menuButtonStyle,
                     }}
                   >
-                    Privacy Policy
+                    {t("navigation.privacyPolicy")}
                   </Button>
                 </Box>
               </Box>
