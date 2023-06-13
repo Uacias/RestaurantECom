@@ -91,19 +91,36 @@ i18n
                   title: "Our Story",
                   history: "History",
                   historyText:
-                    "La Nemours is a French restaurant that was established in 2010 in the heart of the city. Inspired by the rich culinary traditions of France, the owner, a talented French chef, opened the restaurant to share his passion for French cuisine. La Nemours quickly gained popularity for its exquisite dishes crafted with the finest ingredients. With its elegant ambiance and superb food, it has become a cherished dining spot for both locals and tourists.",
+                    "La Nemours is a French restaurant that was established in 2010 in the heart of the city. Inspired by the rich culinary traditions of France, the owner, a talented French chef, opened the restaurant to share his passion for French cuisine. ",
                   flavors: "Fresh French Flavors",
                   flavorsText:
-                    "We take pride in serving only the freshest ingredients to create delicious French cuisine. Our menu features classic dishes made with high-quality, locally sourced ingredients, ensuring that every dish is bursting with flavor. From our savory entrees to our decadent desserts, we strive to provide our guests with an unforgettable dining experience. At La Nemours, you'll savor the taste of authentic French cuisine, prepared with care and served with passion.",
+                    "We take pride in serving only the freshest ingredients to create delicious French cuisine. Our menu features classic dishes made with high-quality, locally sourced ingredients, ensuring that every dish is bursting with flavor. From our savory entrees to our decadent desserts, we strive to provide our guests with an unforgettable dining experience. ",
                   staff: "Passionate Professionals",
                   staffText:
                     "At La Nemours, our team of skilled cooks and friendly staff are dedicated to providing exceptional service and delicious French food. With years of experience and a passion for French cooking techniques, our chefs create unforgettable dishes using the freshest ingredients. Our welcoming staff will make you feel at home, ensuring a memorable dining experience",
                 },
                 famousGuests: {
                   title: "Famous Guests",
+                  subtitle:
+                    "Embark on a gastronomic adventure as renowned critics share their thoughts on the culinary wonders you're about to discover.",
+                  firstOpinion: `"Exquisite dishes, impeccable presentation, culinary masterpiece!"`,
+                  secondOpinion: `"Flavor explosion, unforgettable culinary experiences!"`,
+                  thirdOpinion: `"Michelin-worthy restaurant, unmatched taste!"`,
+                  fourthOpinion: `"Innovative cuisine, culinary excellence at its finest!"`,
+                  fifthOpinion: `"A gastronomic delight, a must-visit for food enthusiasts!"`,
+                  longerOpinions: {
+                    first: ` "The culinary experience at this French restaurant is truly exceptional, with a wide range of exquisitely prepared dishes that delight the palate and showcase the skill and creativity of the chefs. From the moment you step inside, you will be greeted with warm and attentive service, which sets the foundation for an unforgettable culinary journey where every detail is meticulously crafted. The authenticity of French cuisine comes to life with every bite, as the flavors transport you to the streets of Paris, with dishes rooted in tradition and prepared with the finest quality ingredients, offering a truly extraordinary gastronomic adventure. To complement the exceptional dishes, the restaurant boasts an impressive selection of carefully curated wines that perfectly complement the cuisine, elevating the entire culinary experience to new heights." `,
+                    firstPerson: "~Akon Young",
+                    second: `"The gastronomic experience at this French restaurant goes beyond expectations, offering a fascinating combination of flavors and textures that tantalize the senses and showcase the immense talent and innovation of the chefs. As you enter the restaurant, you are immediately enveloped in an atmosphere of elegance and refinement, with a team of knowledgeable and attentive staff who strive to provide truly unforgettable and personalized culinary experiences. What sets this place apart is its dedication to sourcing the highest quality ingredients, resulting in dishes that not only pay homage to French culinary traditions but also present a fusion of global influences. Every bite tells a story, taking you on a culinary journey that transcends borders. "`,
+                    secondPerson: "~Ashley White",
+                  },
                 },
               },
             },
+          },
+          footer: {
+            ourSocials: "Our Socials",
+            rights: "© Le Nemours - 2023, All Rights Reserved",
           },
         },
       },
@@ -181,19 +198,36 @@ i18n
                   title: "Nasza Historia",
                   history: "Historia",
                   historyText:
-                    "Restauracja La Nemours powstała w 2010 roku w samym sercu miasta. Inspiracją do jej otwarcia były bogate tradycje kulinarnego dziedzictwa Francji. Właściciel, utalentowany szef kuchni francuskiej, postanowił podzielić się swoją pasją do francuskiej kuchni. La Nemours szybko zdobyła popularność dzięki wyśmienitym daniom przygotowywanym z najwyższej jakości składników. Dzięki eleganckiej atmosferze i doskonałym potrawom, restauracja stała się ulubionym miejscem zarówno dla mieszkańców, jak i turystów.",
+                    "Restauracja La Nemours powstała w 2010 roku w samym sercu miasta. Inspiracją do jej otwarcia były bogate tradycje kulinarnego dziedzictwa Francji. Właściciel, utalentowany szef kuchni francuskiej, postanowił podzielić się swoją pasją do francuskiej kuchni. ",
                   flavors: "Świeże Smaki Francji",
                   flavorsText:
-                    "Kładziemy nacisk na serwowanie potraw przygotowywanych tylko z najświeższych składników, aby zapewnić naszym gościom niezapomniane doznania smakowe. Nasze menu obejmuje klasyczne dania przygotowane z wysokiej jakości, lokalnie pozyskiwanych składników, co gwarantuje intensywność smaku. Od wykwintnych dań głównych po rozkoszne desery, staramy się zapewnić naszym gościom niezapomniane doświadczenie kulinarne. W La Nemours poczujesz smak autentycznej francuskiej kuchni, przygotowanej z pasją i starannością.",
+                    "Kładziemy nacisk na serwowanie potraw przygotowywanych tylko z najświeższych składników, aby zapewnić naszym gościom niezapomniane doznania smakowe. Nasze menu obejmuje klasyczne dania przygotowane z wysokiej jakości, lokalnie pozyskiwanych składników, co gwarantuje intensywność smaku. Od wykwintnych dań głównych po rozkoszne desery, staramy się zapewnić naszym gościom niezapomniane doświadczenie kulinarne.",
                   staff: "Pasjonaci w Służbie",
                   staffText:
                     "W La Nemours nasz zespół utalentowanych kucharzy i przyjaznego personelu jest oddany świadczeniu wyjątkowej obsługi i serwowania wyśmienitej francuskiej kuchni. Nasi kucharze, posiadający wieloletnie doświadczenie i pasję do francuskich technik kulinarnych, tworzą niezapomniane dania, używając najświeższych składników. Nasz gościnny personel sprawi, że poczujesz się jak w domu, zapewniając niezapomniane doświadczenie kulinarne.",
                 },
                 famousGuests: {
-                  title: "Znani Goście",
+                  title: "Sławni Goście",
+                  subtitle:
+                    "Wyrusz w kulinarną przygodę, gdy renomowani krytycy dzielą się swoimi opiniami na temat cudowności kulinarnej, które zaraz odkryjesz.",
+                  firstOpinion: `"Wyborne dania, nienaganna prezentacja, arcydzieło kulinarne!"`,
+                  secondOpinion: `"Eksplozja smaków, niezapomniane doznania kulinarne!"`,
+                  thirdOpinion: `"Restauracja godna gwiazdek Michelin, niezrównany smak!"`,
+                  fourthOpinion: `"Innowacyjna kuchnia, doskonałość kulinarnej sztuki!"`,
+                  fifthOpinion: `"Kulinarna uczta, miejsce obowiązkowe dla miłośników jedzenia!"`,
+                  longerOpinions: {
+                    first: `"Doświadczenie kulinarne w tej francuskiej restauracji jest naprawdę wyjątkowe, z szerokim wachlarzem wykwintnie przygotowanych dań, które zachwycają podniebienie i prezentują umiejętność i kreatywność szefów kuchni. Od momentu przekroczenia progu, zostaniesz przywitany ciepłą i troskliwą obsługą, która stanowi podstawę niezapomnianego doświadczenia kulinarnej podróży, gdzie każdy detal jest starannie dopracowany. Autentyczność francuskiej kuchni przejawia się w każdym kęsie, gdy smaki przenoszą Cię na ulice Paryża, z daniami zakorzenionymi w tradycji i przygotowanymi z najwyższej jakości składników, co daje prawdziwie niezwykłą gastronomiczną podróż. Aby uzupełnić wyjątkowe dania, restauracja może się poszczycić imponującym wyborem win, starannie dobranym, oferującym różnorodność, która doskonale komponuje się z daniami, podnosząc całe doświadczenie kulinarne na nowe wyżyny.`,
+                    firstPerson: "~Akon Young",
+                    second: `"Doświadczenie gastronomiczne w tej francuskiej restauracji wykracza poza oczekiwania, oferując fascynujące połączenie smaków i tekstur, które pobudzają zmysły i demonstrują ogromny talent i innowację szefów kuchni. Wchodząc do restauracji, natychmiast otula Cię atmosfera elegancji i wyrafinowania, z zespołem znających się na rzeczy i troskliwych pracowników, którzy dokładają wszelkich starań, aby zapewnić prawdziwie niezapomniane i spersonalizowane doświadczenie kulinarne. To, co wyróżnia to miejsce, to jego poświęcenie w poszukiwaniu najwyższej jakości składników, co przekłada się na dania, które nie tylko oddają hołd francuskim tradycjom kulinarnej, ale również prezentują połączenie wpływów globalnych. Każdy kęs opowiada historię, przenosząc Cię w kulinarną podróż, która przekracza granice."`,
+                    secondPerson: "~Ashley White",
+                  },
                 },
               },
             },
+          },
+          footer: {
+            ourSocials: "Nasze Media Społecznościowe",
+            rights: " © Le Nemours - 2023, Wszystkie Prawa Zastrzeżone",
           },
         },
       },

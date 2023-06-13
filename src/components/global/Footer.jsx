@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import footerBackground from "../../img/footer/bg-footer.jpg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -22,9 +23,9 @@ const Footer = () => {
     color: "white",
     fontSize: "20px",
     m: isMobile ? 1 : 3,
-
     textShadow: " 2px 2px 5px green",
   };
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -51,7 +52,7 @@ const Footer = () => {
                 textShadow: " 2px 2px 5px green",
               }}
             >
-              Our Socials
+              {t("footer.ourSocials")}
             </Typography>
             <Box
               sx={{
@@ -178,7 +179,7 @@ const Footer = () => {
                 navigate("/About");
               }}
             >
-              About
+              {t("navigation.about")}
             </Button>
             <Button
               variant="text"
@@ -189,7 +190,7 @@ const Footer = () => {
                 navigate("/Contact");
               }}
             >
-              Contact
+              {t("navigation.contact")}
             </Button>
 
             <Button
@@ -201,7 +202,7 @@ const Footer = () => {
                 navigate("/PrivacyPolicy");
               }}
             >
-              Privacy Policy
+              {t("navigation.privacyPolicy")}
             </Button>
             <Button
               variant="text"
@@ -212,7 +213,7 @@ const Footer = () => {
                 navigate("/TermsAndConditions");
               }}
             >
-              Terms & Conditions
+              {t("navigation.termsConditions")}
             </Button>
           </Box>
           <Box>
@@ -220,7 +221,7 @@ const Footer = () => {
               variant={isMobile ? "h6" : "h5"}
               sx={{ textAlign: "center", mt: 3 }}
             >
-              © Le Nemours - 2023, All Rights Reserved
+              {t("footer.rights")}
             </Typography>
           </Box>
         </Box>
