@@ -12,13 +12,20 @@ import {
 } from "@mui/material";
 
 import Dish from "./Dish";
-// import SearchBox from "./SearchBox";
 
 const DishMenu = () => {
   const dishes = useSelector((state) => state.basket.items);
-  const options = dishes.map((dish) => ({
-    label: dish.attributes.name,
-  }));
+  // const options = dishes.map((dish) => ({
+  //   label: dish.attributes.name,
+  // }));
+  const options = dishes.map((dish) => {
+    return {
+      firstLetter: dish.attributes.category[0],
+      category: dish.attributes.category,
+      label: dish.attributes.name,
+    };
+  });
+
   const [searchValue, setSearchValue] = useState(null);
 
   const [categoryValue, setCategoryValue] = useState("all");
@@ -62,7 +69,10 @@ const DishMenu = () => {
           disablePortal
           id="combo-box-demo"
           autoHighlight
-          options={options}
+          options={options.sort((a, b) =>
+            a.firstLetter.localeCompare(b.firstLetter)
+          )}
+          groupBy={(option) => option.category.toUpperCase()}
           getOptionLabel={(option) => option.label}
           value={searchValue}
           isOptionEqualToValue={(option, value) => option.label === value.label}
@@ -100,6 +110,7 @@ const DishMenu = () => {
         <Tab label="Dessert" value="dessert" />
       </Tabs>
       <Box
+        sx={{ m: "0 auto", display: searchValue ? "flex" : "grid" }}
         margin="0 auto"
         display="grid"
         justifyContent="space-around"

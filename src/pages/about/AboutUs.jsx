@@ -1,9 +1,7 @@
 import { Box, Typography, Tab, Tabs } from "@mui/material";
 import PropTypes from "prop-types";
-
 import { useState } from "react";
 import OurStory from "./OurStory";
-
 import Ratings from "./Ratings";
 
 function TabPanel(props) {
