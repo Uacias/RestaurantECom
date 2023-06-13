@@ -9,6 +9,8 @@ import ContactHours from "./pages/contact/ContactHours";
 import Footer from "./components/global/Footer";
 import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
 import TermsConditions from "./pages/terms/TermsConditions";
+import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
+import CheckoutFailure from "./pages/checkout/CheckoutFailure";
 
 const ScrollTop = () => {
   const { pathname } = useLocation();
@@ -27,6 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="checkout/success" element={<CheckoutSuccess />} />
+          <Route path="checkout/failure" element={<CheckoutFailure />} />
           <Route path="/About" element={<AboutUs />} />
           <Route path="/Contact" element={<ContactHours />} />
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />

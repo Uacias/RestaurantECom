@@ -15,9 +15,6 @@ import Dish from "./Dish";
 
 const DishMenu = () => {
   const dishes = useSelector((state) => state.basket.items);
-  // const options = dishes.map((dish) => ({
-  //   label: dish.attributes.name,
-  // }));
   const options = dishes.map((dish) => {
     return {
       firstLetter: dish.attributes.category[0],
@@ -25,13 +22,10 @@ const DishMenu = () => {
       label: dish.attributes.name,
     };
   });
-
   const [searchValue, setSearchValue] = useState(null);
-
   const [categoryValue, setCategoryValue] = useState("all");
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:1000px)");
-
   const handleChange = (event, newValue) => {
     setCategoryValue(newValue);
     setSearchValue(null);
