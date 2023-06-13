@@ -32,6 +32,10 @@ const NavigationBar = () => {
   const isSmallMobile = useMediaQuery("(max-width:334px)");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const activeLinkStyle = {
+    borderBottom: "1px solid white",
+  };
+
   const menuItemStyle = {
     p: 1,
     mb: 2,
@@ -47,9 +51,6 @@ const NavigationBar = () => {
   };
 
   const [activeLink, setActiveLink] = useState("");
-  const activeLinkStyle = {
-    borderBottom: "1px solid white",
-  };
 
   return (
     <>
@@ -87,7 +88,10 @@ const NavigationBar = () => {
             <Typography
               variant="h5"
               sx={{ "&:hover": { cursor: "pointer" } }}
-              onClick={() => navigate("./")}
+              onClick={() => {
+                navigate("./");
+                setActiveLink("");
+              }}
             >
               Le Nemours
             </Typography>
