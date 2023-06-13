@@ -69,7 +69,6 @@ const BasketMenu = () => {
                 sx={{
                   mt: 3,
                   border: "1px solid black",
-                  borderRadius: "16px",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundImage: `url(http://localhost:1337${dish?.attributes?.image?.data?.attributes?.formats?.medium?.url})`,
@@ -78,7 +77,6 @@ const BasketMenu = () => {
                 <Box
                   sx={{
                     backgroundColor: "rgba(255,255,255,0.63)",
-                    borderRadius: "16px",
                   }}
                 >
                   <Typography
@@ -169,14 +167,14 @@ const BasketMenu = () => {
                     </Box>
                   </Box>
                   <Typography
-                    variant="h4"
+                    variant="h5"
                     textAlign={"center"}
                     sx={{ textShadow: "1px 1px 2px #000000" }}
                   >
                     Subtotal
                   </Typography>
                   <Typography
-                    variant="h4"
+                    variant="h5"
                     textAlign={"center"}
                     sx={{ pb: 2, fontWeight: "bold" }}
                   >
@@ -195,14 +193,25 @@ const BasketMenu = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Typography variant="h4" mt={6} fontWeight="bold">
+            <Typography variant="h5" mt={6} fontWeight="bold">
               Total price
             </Typography>
-            <Typography variant="h4" mt={1} fontWeight="bold">
+            <Typography variant="h5" mt={1} fontWeight="bold">
               {`$${total.toFixed(2)}`}
             </Typography>
+
             <Button
-              sx={{ mt: "16px", fontWeight: "bold", fontSize: 16 }}
+              fullWidth
+              type="submit"
+              color="primary"
+              variant="contained"
+              sx={{
+                boxShadow: "none",
+                color: "white",
+                borderRadius: 0,
+                padding: "15px 40px",
+                mt: 2,
+              }}
               onClick={() => {
                 dispatch(setIsBasketVisible({}));
                 navigate("/checkout");
