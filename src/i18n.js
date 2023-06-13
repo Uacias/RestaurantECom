@@ -19,6 +19,18 @@ i18n
     resources: {
       en: {
         translation: {
+          basket: {
+            title: "Your Basket",
+            subtotal: "Subtotal",
+            total: "Total Cost",
+            checkout: "Checkout",
+            empty: "No products in the basket. Discover our amazing selection!",
+            tooltips: {
+              decrease: "Decrease",
+              increase: "Increase",
+              remove: "Remove",
+            },
+          },
           navigation: {
             menu: "Menu",
             contact: "Contact",
@@ -117,6 +129,16 @@ i18n
                 },
               },
             },
+            contactHours: {
+              title: "Opening Hours",
+              day: "Day",
+              open: "Opening",
+              close: "Closing",
+              getInTouch: "Get in Touch",
+              location: "Lublin, Solna 1",
+              phoneNumber: "+48 333 444 555",
+              email: "lenemours@gmail.com",
+            },
           },
           footer: {
             ourSocials: "Our Socials",
@@ -126,6 +148,18 @@ i18n
       },
       pl: {
         translation: {
+          basket: {
+            title: "Twój Koszyk",
+            subtotal: "Suma częściowa ",
+            total: "Calkowity koszt",
+            checkout: "Zamów",
+            empty: "Brak produktów w koszyku. Odkryj naszy wspaniały wybór!",
+            tooltips: {
+              decrease: "Zmniejsz ilość",
+              increase: "Zwiększ ilość",
+              remove: "Usuń",
+            },
+          },
           navigation: {
             menu: "Menu",
             contact: "Kontakt",
@@ -223,6 +257,17 @@ i18n
                   },
                 },
               },
+            },
+            contactHours: {
+              title: "Godziny Otwarcia",
+              day: "Dzień",
+              open: "Otwarcie",
+              close: "Zamknięcie",
+
+              getInTouch: "Skontaktuj się z nami",
+              location: "Lublin, Solna 1",
+              phoneNumber: "+48 333 444 555",
+              email: "lenemours@gmail.com",
             },
           },
           footer: {
