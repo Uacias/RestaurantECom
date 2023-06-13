@@ -37,7 +37,6 @@ const BasketMenu = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            borderBottom: "1px solid black",
           }}
         >
           <Typography
@@ -107,8 +106,6 @@ const BasketMenu = () => {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        //TODO: THINK
-                        // backgroundColor: "rgba(0,0,0,.3)",
                         borderRadius: "6px",
                       }}
                     >
@@ -215,13 +212,14 @@ const BasketMenu = () => {
             </Button>
           </Box>
         ) : (
-          <Box sx={{ mt: 4 }}>
+          <Box sx={{ mt: 3 }}>
             <Typography variant="h5">
               Nothing in your basket yet. Discover our fantastic selection!
             </Typography>
           </Box>
         )}
       </Box>
+      {/* BASKET END */}
     </Drawer>
   );
 };

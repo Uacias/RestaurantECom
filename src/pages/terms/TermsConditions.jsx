@@ -1,7 +1,9 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import termsBackground from "../../img/terms-policy/bg-terms.jpg";
+
 const TermsConditions = () => {
   const isMobile = useMediaQuery("(max-width:425px)");
+
   return (
     <Box
       sx={{
@@ -14,7 +16,7 @@ const TermsConditions = () => {
     >
       <Box
         sx={{
-          background: "rgba(255,255,255,.6)",
+          background: "rgba(255,255,255,.7)",
           paddingBlock: 10,
           paddingInline: "12.5%",
         }}
@@ -25,35 +27,37 @@ const TermsConditions = () => {
         >
           Terms & Conditions
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 8 }}>
-          Witamy w naszej usłudze! Przed rozpoczęciem korzystania z naszego
-          serwisu, prosimy o zapoznanie się z poniższymi warunkami i zasadami:
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 8 }}>
+          Welcome to our service! Before using our website, please read the
+          following terms and conditions:
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 7 }}>
-          1. Korzystając z naszej usługi, akceptujesz nasze warunki użytkowania
-          oraz politykę prywatności.
-          <br />
-          <br />
-          2. Zabrania się używania naszej usługi w sposób niezgodny z
-          obowiązującym prawem.
-          <br />
-          <br />
-          3. Zastrzegamy sobie prawo do wprowadzania zmian w naszej usłudze w
-          dowolnym momencie. Informacje dotyczące zmian będą udostępniane
-          użytkownikom w sposób odpowiedni, na przykład poprzez ogłoszenia na
-          stronie internetowej lub powiadomienia emailowe. Kontynuowanie
-          korzystania z naszej usługi po wprowadzeniu zmian oznacza akceptację
-          nowych warunków.
-          <br />
-          <br />
-          4. Wszelkie prawa autorskie i własność intelektualna należą do naszej
-          firmy.
-          <br />
-          <br />
-          <br />
-          <br />
-          Dziękujemy za skorzystanie z naszej usługi. Jeśli masz jakiekolwiek
-          pytania lub wątpliwości, skontaktuj się z nami.
+        <Typography
+          variant={isMobile ? "h6" : "h5"}
+          component="ol"
+          sx={{ mt: 7 }}
+        >
+          <li>
+            By using our service, you agree to our terms of use and privacy
+            policy.
+          </li>
+          <li>
+            It is prohibited to use our service in violation of applicable laws.
+          </li>
+          <li>
+            We reserve the right to make changes to our service at any time.
+            Information about the changes will be provided to users in an
+            appropriate manner, such as through announcements on the website or
+            email notifications. Continued use of our service after the changes
+            have been made indicates acceptance of the new terms.
+          </li>
+          <li>
+            All copyrights and intellectual property rights belong to our
+            company.
+          </li>
+        </Typography>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 7 }}>
+          Thank you for using our service. If you have any questions or
+          concerns, please contact us.
         </Typography>
       </Box>
     </Box>

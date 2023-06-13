@@ -8,13 +8,13 @@ const PrivacyPolicy = () => {
         width: "100%",
         mt: "64px",
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: "top right",
         backgroundImage: `url(${termsPolicy})`,
       }}
     >
       <Box
         sx={{
-          background: "rgba(255,255,255,.6)",
+          background: "rgba(255,255,255,.7)",
           paddingBlock: 10,
           paddingInline: "12.5%",
         }}
@@ -25,11 +25,11 @@ const PrivacyPolicy = () => {
         >
           Privacy Policy
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 8 }}>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 8 }}>
           Welcome to our service! Before using our website, please read the
           following terms and conditions:
         </Typography>
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: 7 }}>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 7 }}>
           <ol>
             <li>
               <strong>Collection of Personal Data:</strong>

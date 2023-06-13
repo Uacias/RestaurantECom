@@ -15,7 +15,7 @@ function createData(weekDay, timeOpen, timeClose) {
 }
 
 const rows = [
-  createData("Sunday", "8:00 A.m.", "6:00 P.m."),
+  createData("Sunday", "11:00 A.m.", "5:00 P.m."),
   createData("Monday", "10:00 A.m.", "10:00 P.m."),
   createData("Tuesday", "10:00 A.m.", "10:00 P.m."),
   createData("Wednesday", "10:00 A.m.", "10:00 P.m."),
@@ -26,6 +26,7 @@ const rows = [
 
 const ContactHours = () => {
   const isMobile = useMediaQuery("(min-width: 769px)");
+  const isSmallMobile = useMediaQuery("(max-width: 490px)");
   const tableWidth = isMobile ? "66%" : "100%";
   return (
     <Box
@@ -38,60 +39,82 @@ const ContactHours = () => {
         borderRadius: "16px",
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{ textAlign: "center", fontWeight: "bold", mb: "16px" }}
-      >
-        Opening Hours
-      </Typography>
-      <TableContainer
-        sx={{ width: tableWidth, margin: "0 auto" }}
-        component={Paper}
-      >
-        <Table sx={{ minWidth: 320 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "bold", fontSize: "1.3rem" }}>
-                Day
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
-              >
-                Open
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
-              >
-                Close
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+      <Box>
+        <Typography
+          variant="h2"
+          sx={{ textAlign: "center", fontWeight: "bold", mb: "16px" }}
+        >
+          Opening Hours
+        </Typography>
+        {isSmallMobile ? (
+          <>
             {rows.map((row) => (
-              <TableRow
-                key={row.weekDay}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell
-                  component="th"
-                  scope="row"
-                  sx={{ fontSize: "1.11rem" }}
+              <Box sx={{ mb: 2 }}>
+                <Typography
+                  key={row.weekDay}
+                  variant="h5"
+                  sx={{ fontWeight: "bold" }}
                 >
-                  {row.weekDay}
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: "1.11rem" }}>
-                  {row.timeClose}
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: "1.11rem" }}>
-                  {row.timeClose}
-                </TableCell>
-              </TableRow>
+                  {`${row.weekDay} `}
+                </Typography>
+                <Typography variant="h6">
+                  {`${row.timeOpen} - ${row.timeClose}`}
+                </Typography>
+              </Box>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </>
+        ) : (
+          <TableContainer
+            sx={{ width: tableWidth, margin: "0 auto" }}
+            component={Paper}
+          >
+            <Table sx={{ minWidth: 320 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+                    Day
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
+                  >
+                    Open
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
+                  >
+                    Close
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    key={row.weekDay}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{ fontSize: "1.11rem" }}
+                    >
+                      {row.weekDay}
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontSize: "1.11rem" }}>
+                      {row.timeClose}
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontSize: "1.11rem" }}>
+                      {row.timeClose}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </Box>
+
       <Typography
         variant="h2"
         sx={{ textAlign: "center", fontWeight: "bold", marginBlock: "32px " }}
