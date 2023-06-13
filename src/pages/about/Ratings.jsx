@@ -29,8 +29,9 @@ const Ratings = () => {
     backdropFilter: "blur(7.4px)",
     WebkitBackdropFilter: "blur(7.4px)",
   };
+
   return (
-    <Box Box width="75%" margin="40px auto" sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "center", m: "40px auto", widt: "75%" }}>
       <Typography
         variant="h2"
         sx={{ textAlign: "center", marginBlock: "16px", fontWeight: "bold" }}

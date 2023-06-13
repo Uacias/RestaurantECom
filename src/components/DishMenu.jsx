@@ -1,18 +1,33 @@
 import { setItems } from "../state";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Box, Tab, Tabs, Typography, useMediaQuery } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 
 import Dish from "./Dish";
+// import SearchBox from "./SearchBox";
 
 const DishMenu = () => {
   const dishes = useSelector((state) => state.basket.items);
+  const options = dishes.map((dish) => ({
+    label: dish.attributes.name,
+  }));
+  const [searchValue, setSearchValue] = useState(null);
+
   const [categoryValue, setCategoryValue] = useState("all");
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:1000px)");
 
   const handleChange = (event, newValue) => {
     setCategoryValue(newValue);
+    setSearchValue(null);
   };
 
   async function getDishList() {
@@ -21,7 +36,6 @@ const DishMenu = () => {
     );
     const dishesJson = await dishes.json();
     dispatch(setItems(dishesJson.data));
-    console.log(dishes);
   }
 
   useEffect(() => {
@@ -43,6 +57,27 @@ const DishMenu = () => {
       <Typography variant="h2" textAlign="center">
         Check Our Menu
       </Typography>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: "16px" }}>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          autoHighlight
+          options={options}
+          getOptionLabel={(option) => option.label}
+          value={searchValue}
+          isOptionEqualToValue={(option, value) => option.label === value.label}
+          onChange={(event, newValue) => {
+            setSearchValue(newValue);
+          }}
+          sx={{
+            width: useMediaQuery("(min-width:450px)") ? "300px" : "200px",
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Search for products" />
+          )}
+        />
+      </Box>
+
       <Tabs
         value={categoryValue}
         onChange={handleChange}
@@ -71,38 +106,45 @@ const DishMenu = () => {
         gridTemplateColumns="repeat(auto-fill, 300px)"
         rowGap="16px"
       >
-        {categoryValue === "all" &&
-          dishes.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "appetizer" &&
-          menuCategoriesItems.appetizer.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "soup" &&
-          menuCategoriesItems.soup.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "seafood" &&
-          menuCategoriesItems.seafood.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "pasta" &&
-          menuCategoriesItems.pasta.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "steak" &&
-          menuCategoriesItems.steak.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "burger" &&
-          menuCategoriesItems.burger.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
-        {categoryValue === "dessert" &&
-          menuCategoriesItems.dessert.map((dish) => {
-            return <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>;
-          })}
+        {searchValue
+          ? dishes
+              .filter((dish) => dish.attributes.name === searchValue.label)
+              .map((dish) => (
+                <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+              ))
+          : categoryValue === "all"
+          ? dishes.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "appetizer"
+          ? menuCategoriesItems.appetizer.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "soup"
+          ? menuCategoriesItems.soup.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "seafood"
+          ? menuCategoriesItems.seafood.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "pasta"
+          ? menuCategoriesItems.pasta.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "steak"
+          ? menuCategoriesItems.steak.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "burger"
+          ? menuCategoriesItems.burger.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : categoryValue === "dessert"
+          ? menuCategoriesItems.dessert.map((dish) => (
+              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
+            ))
+          : null}
       </Box>
     </Box>
   );
