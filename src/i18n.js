@@ -20,6 +20,7 @@ i18n
       en: {
         translation: {
           checkout: {
+            contactInfo: "Dane Kontaktowe",
             label: {
               sameForShipping: "Same Shipping Data",
             },
@@ -193,6 +194,8 @@ i18n
       pl: {
         translation: {
           checkout: {
+            contactInfo: "Dane Kontaktowe",
+
             label: {
               sameForShipping: "Identyczne Dane Wysyłki",
             },
