@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromBasket, setIsBasketVisible } from "../../state";
 import { decreaseCount, increaseCount } from "../../state";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const BasketMenu = () => {
   const dispatch = useDispatch();
   const isBasketVisible = useSelector((state) => state.basket.isBasketVisible);
   const basket = useSelector((state) => state.basket.basket);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const total = basket.reduce((price, item) => {
     return (price += item.attributes.price * item.count);
@@ -45,7 +47,7 @@ const BasketMenu = () => {
               p: 1,
             }}
           >
-            Your Basket
+            {t("basket.title")}
           </Typography>
           <IconButton
             color="inherit"
@@ -88,7 +90,11 @@ const BasketMenu = () => {
                     }}
                     variant="h5"
                   >
-                    {truncateString(dish.attributes.name)}
+                    {truncateString(
+                      i18n.language === "pl"
+                        ? dish.attributes.namePL
+                        : dish.attributes.name
+                    )}
                   </Typography>
                   <Box
                     key={`${dish.id}_${dish.attributes.name}`}
@@ -108,7 +114,7 @@ const BasketMenu = () => {
                       }}
                     >
                       <Box>
-                        <Tooltip title="Decrease">
+                        <Tooltip title={t("basket.tooltips.decrease")}>
                           <IconButton
                             sx={{ background: "rgba(0,0,0,.3)" }}
                             onClick={() => {
@@ -133,7 +139,7 @@ const BasketMenu = () => {
                         </Typography>
                       </Box>
                       <Box>
-                        <Tooltip title="Increase">
+                        <Tooltip title={t("basket.tooltips.increase")}>
                           <IconButton
                             sx={{ background: "rgba(0,0,0,.3)" }}
                             onClick={() => {
@@ -146,7 +152,7 @@ const BasketMenu = () => {
                       </Box>
                     </Box>
                     <Box>
-                      <Tooltip title="Remove All">
+                      <Tooltip title={t("basket.tooltips.remove")}>
                         <IconButton
                           sx={{
                             backgroundColor: "rgba(0,0,0, .3)",
@@ -171,7 +177,7 @@ const BasketMenu = () => {
                     textAlign={"center"}
                     sx={{ textShadow: "1px 1px 2px #000000" }}
                   >
-                    Subtotal
+                    {t("basket.subtotal")}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -194,7 +200,7 @@ const BasketMenu = () => {
             justifyContent="center"
           >
             <Typography variant="h5" mt={6} fontWeight="bold">
-              Total price
+              {t("basket.total")}
             </Typography>
             <Typography variant="h5" mt={1} fontWeight="bold">
               {`$${total.toFixed(2)}`}
@@ -217,14 +223,12 @@ const BasketMenu = () => {
                 navigate("/checkout");
               }}
             >
-              Checkout
+              {t("basket.checkout")}
             </Button>
           </Box>
         ) : (
           <Box sx={{ mt: 3 }}>
-            <Typography variant="h5">
-              Nothing in your basket yet. Discover our fantastic selection!
-            </Typography>
+            <Typography variant="h5">{t("basket.empty")}</Typography>
           </Box>
         )}
       </Box>

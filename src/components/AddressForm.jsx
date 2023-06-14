@@ -2,6 +2,7 @@ import { getIn } from "formik";
 import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
 
 const AddressForm = ({
   type,
@@ -11,6 +12,7 @@ const AddressForm = ({
   handleBlur,
   handleChange,
 }) => {
+  const { t } = useTranslation();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   // these functions allow for better code readability
@@ -37,7 +39,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="First Name"
+        label={t("checkout.addressForm.firstName")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.firstName}
@@ -49,7 +51,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Last Name"
+        label={t("checkout.addressForm.lastName")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.lastName}
@@ -61,7 +63,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Country"
+        label={t("checkout.addressForm.country")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.country}
@@ -73,7 +75,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Street Address"
+        label={t("checkout.addressForm.streetAddress")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.street1}
@@ -85,7 +87,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Street Address 2 (optional)"
+        label={t("checkout.addressForm.streetAddress")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.street2}
@@ -97,7 +99,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="City"
+        label={t("checkout.addressForm.city")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.city}
@@ -109,7 +111,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="State"
+        label={t("checkout.addressForm.state")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.state}
@@ -121,7 +123,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Zip Code"
+        label={t("checkout.addressForm.zipCode")}
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.zipCode}
