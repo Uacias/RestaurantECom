@@ -19,6 +19,19 @@ i18n
     resources: {
       en: {
         translation: {
+          addToBasket: "Add to basket",
+          dishMenu: {
+            title: "Check Our Menu",
+            searchLabel: "Search for products...",
+            all: "All",
+            appetizer: "Appetizers",
+            soup: "Soups",
+            pasta: "Pasta",
+            seafood: "Seafood",
+            steak: "Steaks",
+            burger: "Burgers",
+            dessert: "Desserts",
+          },
           basket: {
             title: "Your Basket",
             subtotal: "Subtotal",
@@ -148,6 +161,19 @@ i18n
       },
       pl: {
         translation: {
+          addToBasket: "Dodaj do koszyka",
+          dishMenu: {
+            title: "Sprawdź Nasze Menu",
+            searchLabel: "Szukaj produktów...",
+            all: "Wszystko",
+            appetizer: "Przystawki",
+            soup: "Zupy",
+            pasta: "Makarony",
+            seafood: "Owoce morza",
+            steak: "Steki",
+            burger: "Burgery",
+            dessert: "Desery",
+          },
           basket: {
             title: "Twój Koszyk",
             subtotal: "Suma częściowa ",

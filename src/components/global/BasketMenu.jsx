@@ -15,7 +15,7 @@ const BasketMenu = () => {
   const isBasketVisible = useSelector((state) => state.basket.isBasketVisible);
   const basket = useSelector((state) => state.basket.basket);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const total = basket.reduce((price, item) => {
     return (price += item.attributes.price * item.count);
@@ -90,7 +90,11 @@ const BasketMenu = () => {
                     }}
                     variant="h5"
                   >
-                    {truncateString(dish.attributes.name)}
+                    {truncateString(
+                      i18n.language === "pl"
+                        ? dish.attributes.namePL
+                        : dish.attributes.name
+                    )}
                   </Typography>
                   <Box
                     key={`${dish.id}_${dish.attributes.name}`}
