@@ -1,6 +1,6 @@
 import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import AddressForm from "./AddressForm";
-
+import { useTranslation } from "react-i18next";
 const Shipping = ({
   values,
   touched,
@@ -9,12 +9,13 @@ const Shipping = ({
   handleBlur,
   setFieldValue,
 }) => {
+  const { t } = useTranslation();
   return (
-    <Box m="30px auto">
+    <Box sx={{ m: "60px auto" }}>
       {/* BILLING FORM */}
       <Box>
-        <Typography sx={{ mb: "15px" }} fontSize="18px">
-          Billing Information
+        <Typography sx={{ mb: "20px" }} fontSize="24px">
+          {t("checkout.steps.billing")}
         </Typography>
         <AddressForm
           type="billingAddress"
@@ -40,7 +41,7 @@ const Shipping = ({
               }
             />
           }
-          label="Same for Shipping Address"
+          label={t("checkout.label.sameForShipping")}
         />
       </Box>
 
@@ -48,7 +49,7 @@ const Shipping = ({
       {!values.shippingAddress.isSameAddress && (
         <Box>
           <Typography sx={{ mb: "15px" }} fontSize="18px">
-            Shipping Information
+            {t("checkout.steps.shipping")}
           </Typography>
           <AddressForm
             type="shippingAddress"

@@ -15,13 +15,17 @@ import Dish from "./Dish";
 import { useTranslation } from "react-i18next";
 
 const DishMenu = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dishes = useSelector((state) => state.basket.items);
+
   const options = dishes.map((dish) => {
+    const category = t(`dishMenu.${dish.attributes.category}`);
+    const name =
+      i18n.language === "pl" ? dish.attributes.namePL : dish.attributes.name;
     return {
       firstLetter: dish.attributes.category[0],
-      category: dish.attributes.category,
-      label: dish.attributes.name,
+      category: category,
+      label: name,
     };
   });
   const [searchValue, setSearchValue] = useState(null);
@@ -39,6 +43,7 @@ const DishMenu = () => {
     );
     const dishesJson = await dishes.json();
     dispatch(setItems(dishesJson.data));
+    console.log(dishesJson.data);
   }
 
   useEffect(() => {

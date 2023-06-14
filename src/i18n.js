@@ -12,13 +12,44 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    fallbackLng: "en",
+    fallbackLng: "pl",
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     resources: {
       en: {
         translation: {
+          checkout: {
+            label: {
+              sameForShipping: "Same Shipping Data",
+            },
+            steps: {
+              billing: "Billing Data",
+              shipping: "Shipping Data",
+              payment: "Payment Data",
+            },
+            buttons: {
+              back: "Back",
+              next: "Next",
+              placeOrder: "Place Order",
+            },
+            validation: {
+              required: "required",
+            },
+            addressForm: {
+              firstName: "First Name",
+              lastName: "Last Name",
+              country: "Country",
+              streetAddress: "Street Address",
+              city: "City",
+              state: "State",
+              zipCode: "Zip Code",
+            },
+            paymentForm: {
+              email: "Email",
+              phoneNumber: "Phone Number",
+            },
+          },
           addToBasket: "Add to basket",
           dishMenu: {
             title: "Check Our Menu",
@@ -161,6 +192,37 @@ i18n
       },
       pl: {
         translation: {
+          checkout: {
+            label: {
+              sameForShipping: "Identyczne Dane Wysyłki",
+            },
+            steps: {
+              billing: "Dane Rachunku",
+              shipping: "Dane Wysyłki",
+              payment: "Płatność",
+            },
+            buttons: {
+              back: "Cofnij",
+              next: "Dalej",
+              placeOrder: "Złóż Zamówienie",
+            },
+            validation: {
+              required: "wymagane",
+            },
+            addressForm: {
+              firstName: "Imię",
+              lastName: "Nazwisko",
+              country: "Kraj",
+              streetAddress: "Adres",
+              city: "Miasto",
+              state: "Województwo",
+              zipCode: "Kod pocztowy",
+            },
+            paymentForm: {
+              email: "Email",
+              phoneNumber: "Numer Telefonu",
+            },
+          },
           addToBasket: "Dodaj do koszyka",
           dishMenu: {
             title: "Sprawdź Nasze Menu",
