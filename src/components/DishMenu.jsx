@@ -12,14 +12,20 @@ import {
 } from "@mui/material";
 
 import Dish from "./Dish";
+import { useTranslation } from "react-i18next";
 
 const DishMenu = () => {
+  const { t, i18n } = useTranslation();
   const dishes = useSelector((state) => state.basket.items);
+
   const options = dishes.map((dish) => {
+    const category = t(`dishMenu.${dish.attributes.category}`);
+    const name =
+      i18n.language === "pl" ? dish.attributes.namePL : dish.attributes.name;
     return {
       firstLetter: dish.attributes.category[0],
-      category: dish.attributes.category,
-      label: dish.attributes.name,
+      category: category,
+      label: name,
     };
   });
   const [searchValue, setSearchValue] = useState(null);
@@ -37,6 +43,7 @@ const DishMenu = () => {
     );
     const dishesJson = await dishes.json();
     dispatch(setItems(dishesJson.data));
+    console.log(dishesJson.data);
   }
 
   useEffect(() => {
@@ -56,7 +63,7 @@ const DishMenu = () => {
   return (
     <Box width="75%" margin="40px auto">
       <Typography variant="h2" textAlign="center">
-        Check Our Menu
+        {t("dishMenu.title")}
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", mt: "16px" }}>
         <Autocomplete
@@ -77,7 +84,7 @@ const DishMenu = () => {
             width: useMediaQuery("(min-width:450px)") ? "300px" : "200px",
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Search for products" />
+            <TextField {...params} label={t("dishMenu.searchLabel")} />
           )}
         />
       </Box>
@@ -94,14 +101,14 @@ const DishMenu = () => {
           },
         }}
       >
-        <Tab label="All" value="all" />
-        <Tab label="Appetizer" value="appetizer" />
-        <Tab label="Soup" value="soup" />
-        <Tab label="Seafood" value="seafood" />
-        <Tab label="Pasta" value="pasta" />
-        <Tab label="Steak" value="steak" />
-        <Tab label="Burger" value="burger" />
-        <Tab label="Dessert" value="dessert" />
+        <Tab label={t("dishMenu.all")} value="all" />
+        <Tab label={t("dishMenu.appetizer")} value="appetizer" />
+        <Tab label={t("dishMenu.soup")} value="soup" />
+        <Tab label={t("dishMenu.seafood")} value="seafood" />
+        <Tab label={t("dishMenu.pasta")} value="pasta" />
+        <Tab label={t("dishMenu.steak")} value="steak" />
+        <Tab label={t("dishMenu.burger")} value="burger" />
+        <Tab label={t("dishMenu.dessert")} value="dessert" />
       </Tabs>
       <Box
         sx={{ m: "0 auto", display: searchValue ? "flex" : "grid" }}

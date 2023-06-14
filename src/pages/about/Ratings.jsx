@@ -16,6 +16,7 @@ import avatar6 from "../../img/portrait/avatar6.jpg";
 import avatar7 from "../../img/portrait/avatar7.jpg";
 import ArrowLefttIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { useTranslation } from "react-i18next";
 const Ratings = () => {
   const isTablet = useMediaQuery("(max-width: 769px)");
   const isSmallTablet = useMediaQuery("(max-width:715px)");
@@ -29,6 +30,7 @@ const Ratings = () => {
     backdropFilter: "blur(7.4px)",
     WebkitBackdropFilter: "blur(7.4px)",
   };
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ textAlign: "center", m: "40px auto", widt: "75%" }}>
@@ -36,19 +38,18 @@ const Ratings = () => {
         variant="h2"
         sx={{ textAlign: "center", marginBlock: "16px", fontWeight: "bold" }}
       >
-        Gourmet Gossips
+        {t("pages.about.tabs.famousGuests.title")}
       </Typography>
       <Typography
         variant="h3"
         sx={{ textAlign: "center", marginBlock: "16px" }}
       >
-        Embark on a gastronomic adventure as renowned critics share their
-        thoughts on the culinary wonders you're about to discover.
+        {t("pages.about.tabs.famousGuests.subtitle")}
       </Typography>
       <ReactCarousel
         centerMode
         centerSlidePercentage={centerSlidePercentage}
-        infiniteLoop={false}
+        infiniteLoop={true}
         showStatus={false}
         showThumbs={false}
         showIndicators={false}
@@ -100,7 +101,7 @@ const Ratings = () => {
               Amy Sharp
             </Typography>
             <Typography variant="h5" sx={{ mt: "8px" }}>
-              "Exquisite dishes, impeccable presentation, culinary masterpiece!"
+              {t("pages.about.tabs.famousGuests.firstOpinion")}{" "}
             </Typography>
           </Box>
         </Box>
@@ -125,7 +126,7 @@ const Ratings = () => {
               John Bowe
             </Typography>
             <Typography variant="h5" sx={{ mt: "8px" }}>
-              "Flavor explosion, unforgettable culinary experiences!"
+              {t("pages.about.tabs.famousGuests.secondOpinion")}{" "}
             </Typography>
           </Box>
         </Box>
@@ -150,7 +151,7 @@ const Ratings = () => {
               Andre Schultz
             </Typography>
             <Typography variant="h5" sx={{ mt: "8px" }}>
-              "Michelin-worthy restaurant, unmatched taste!"
+              {t("pages.about.tabs.famousGuests.thirdOpinion")}
             </Typography>
           </Box>
         </Box>
@@ -175,7 +176,7 @@ const Ratings = () => {
               Adam Smith
             </Typography>
             <Typography variant="h5" sx={{ mt: "8px" }}>
-              "Innovative cuisine, culinary excellence at its finest!"
+              {t("pages.about.tabs.famousGuests.fourthOpinion")}{" "}
             </Typography>
           </Box>
         </Box>
@@ -200,7 +201,7 @@ const Ratings = () => {
               Dana White
             </Typography>
             <Typography variant="h5" sx={{ mt: "8px" }}>
-              "A gastronomic delight, a must-visit for food enthusiasts!"
+              {t("pages.about.tabs.famousGuests.fifthOpinion")}
             </Typography>
           </Box>
         </Box>
@@ -227,28 +228,11 @@ const Ratings = () => {
       >
         <Box sx={{ maxWidth: "600px" }}>
           <Typography variant="h5" sx={{ paddingTop: "64px" }}>
-            "The culinary experience at this French restaurant is truly
-            exceptional, with an array of exquisitely crafted dishes that
-            delight the taste buds and showcase the{" "}
-            <strong>skill and creativity</strong> of the chefs."
-            <br /> <br />
-            "From the moment you step through the doors, you are greeted with
-            <strong> warm and attentive service</strong> that sets the tone for
-            a memorable dining experience, where every detail is carefully
-            attended to."
-            <br /> <br />
-            "The <strong>authenticity</strong> of the French cuisine shines
-            through in every bite, as the flavors transport you to the streets
-            of Paris, with dishes that are steeped in tradition and made with
-            the finest ingredients, resulting in a truly remarkable gastronomic
-            journey."
-            <br /> <br />
-            "To complement the <strong>exceptional</strong> food, the restaurant
-            boasts an impressive wine selection, curated to perfection, offering
-            a diverse range of choices that beautifully pair with the dishes,
-            elevating the overall dining experience to new heights."
-            <br /> <br />
-            <strong>~Akon Young</strong>
+            {t("pages.about.tabs.famousGuests.longerOpinions.first")}
+            <br />
+            <strong>
+              {t("pages.about.tabs.famousGuests.longerOpinions.firstPerson")}
+            </strong>
           </Typography>
         </Box>
         <Box>
@@ -285,23 +269,11 @@ const Ratings = () => {
       >
         <Box sx={{ maxWidth: "600px" }}>
           <Typography variant="h5" sx={{ paddingTop: "64px" }}>
-            "The dining experience at this French restaurant goes{" "}
-            <strong> beyond expectations</strong> , offering a captivating blend
-            of flavors and textures that ignite the senses and demonstrate the
-            immense talent and innovation of the chefs."
-            <br /> <br />
-            "Stepping into the restaurant, you are immediately enveloped in an
-            atmosphere of <strong> elegance and sophistication</strong> , with a
-            knowledgeable and attentive staff who go above and beyond to ensure
-            a truly memorable and personalized dining experience."
-            <br /> <br />
-            "What sets this establishment apart is its dedication to sourcing
-            the finest ingredients, resulting in dishes that not only pay homage
-            to <strong> French culinary traditions </strong> but also showcase a
-            fusion of global influences. Each bite tells a story, transporting
-            you on a gastronomic journey that transcends borders."
-            <br /> <br />
-            <strong>~Ashley White</strong>
+            {t("pages.about.tabs.famousGuests.longerOpinions.second")}
+            <br />
+            <strong>
+              {t("pages.about.tabs.famousGuests.longerOpinions.secondPerson")}
+            </strong>
           </Typography>
         </Box>
         <Box>

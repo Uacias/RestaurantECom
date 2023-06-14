@@ -10,14 +10,16 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../state";
-
+import { useTranslation } from "react-i18next";
 const Dish = ({ dish, width }) => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [count, setCount] = useState(1);
   const [hover, setHover] = useState(false);
-  const { name, price, image } = dish.attributes;
+  const { name, price, image, namePL } = dish.attributes;
+
   const url = image?.data?.attributes?.formats?.small?.url;
+  const { t, i18n } = useTranslation();
 
   return (
     <Box width={width}>
@@ -76,13 +78,16 @@ const Dish = ({ dish, width }) => {
               }}
               sx={{ fontWeight: "bold", color: "rgba(0,0,0,0.8)" }}
             >
-              Add to Basket
+              {t("addToBasket")}
             </Button>
           </Box>
         </Box>
       </Box>
       <Box>
-        <Typography variant="h6">{name}</Typography>
+        <Typography variant="h6">
+          {i18n.language === "pl" ? namePL : name}
+        </Typography>
+
         <Typography variant="h6" fontWeight="bold">
           ${price}
         </Typography>

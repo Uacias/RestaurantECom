@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import OurStory from "./OurStory";
 import Ratings from "./Ratings";
+import { useTranslation } from "react-i18next";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,6 +39,7 @@ function a11yProps(index) {
 }
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -54,8 +56,11 @@ const AboutUs = () => {
         }}
       >
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Our Story" {...a11yProps(0)} />
-          <Tab label="Famous Guests" {...a11yProps(1)} />
+          <Tab label={t("pages.about.tabs.ourStory.title")} {...a11yProps(0)} />
+          <Tab
+            label={t("pages.about.tabs.famousGuests.title")}
+            {...a11yProps(1)}
+          />
         </Tabs>
       </Box>
 

@@ -1,8 +1,10 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import termsBackground from "../../img/terms-policy/bg-terms.jpg";
+import { useTranslation } from "react-i18next";
 
 const TermsConditions = () => {
   const isMobile = useMediaQuery("(max-width:425px)");
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -25,39 +27,23 @@ const TermsConditions = () => {
           variant="h2"
           sx={{ textAlign: "center", fontWeight: "bold" }}
         >
-          Terms & Conditions
+          {t("navigation.termsConditions")}
         </Typography>
         <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 8 }}>
-          Welcome to our service! Before using our website, please read the
-          following terms and conditions:
+          {t("pages.termsConditions.subtitle")}
         </Typography>
         <Typography
           variant={isMobile ? "h6" : "h5"}
           component="ol"
           sx={{ mt: 7 }}
         >
-          <li>
-            By using our service, you agree to our terms of use and privacy
-            policy.
-          </li>
-          <li>
-            It is prohibited to use our service in violation of applicable laws.
-          </li>
-          <li>
-            We reserve the right to make changes to our service at any time.
-            Information about the changes will be provided to users in an
-            appropriate manner, such as through announcements on the website or
-            email notifications. Continued use of our service after the changes
-            have been made indicates acceptance of the new terms.
-          </li>
-          <li>
-            All copyrights and intellectual property rights belong to our
-            company.
-          </li>
+          <li>{t("pages.termsConditions.firstRule")}</li>
+          <li>{t("pages.termsConditions.secondRule")}</li>
+          <li>{t("pages.termsConditions.thirdRule")}</li>
+          <li>{t("pages.termsConditions.fourthRule")}</li>
         </Typography>
         <Typography variant={isMobile ? "h6" : "h5"} sx={{ mt: 7 }}>
-          Thank you for using our service. If you have any questions or
-          concerns, please contact us.
+          {t("pages.termsConditions.appreciation")}
         </Typography>
       </Box>
     </Box>

@@ -7,6 +7,7 @@ import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import basketReducer from "./state";
+import "./i18n";
 
 const store = configureStore({
   reducer: { basket: basketReducer },

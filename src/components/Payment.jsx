@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-
+import { useTranslation } from "react-i18next";
 const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
+  const { t } = useTranslation();
   return (
-    <Box m="30px 0">
+    <Box sx={{ m: "35px 0" }}>
       {/* CONTACT INFO */}
       <Box>
         <Typography sx={{ mb: "15px" }} fontSize="18px">
@@ -12,7 +13,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
         <TextField
           fullWidth
           type="text"
-          label="Email"
+          label={t("checkout.paymentForm.email")}
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.email}
@@ -24,7 +25,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
         <TextField
           fullWidth
           type="text"
-          label="Phone Number"
+          label={t("checkout.paymentForm.phoneNumber")}
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.phoneNumber}

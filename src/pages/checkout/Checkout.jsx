@@ -6,12 +6,14 @@ import { Formik } from "formik";
 import Payment from "../../components/Payment";
 import Shipping from "../../components/Shipping";
 import { loadStripe } from "@stripe/stripe-js";
+import { useTranslation } from "react-i18next";
 
 const stripePromise = loadStripe(
   "pk_test_51MNz5KFJcWLRGDqbgsy0gn50Qv7NkHACvdCXTIIxqwv2BmDpB6f5p0GLKLOW7nDUViQhIUK9HEImM1AGz2hHGpGn00LgjWGGBw"
 );
 
 const Checkout = () => {
+  const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(0);
   const basket = useSelector((state) => state.basket.basket);
   const isFirstStep = activeStep === 0;
@@ -60,10 +62,10 @@ const Checkout = () => {
     <Box width="80%" m="100px auto">
       <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
         <Step>
-          <StepLabel>Billing</StepLabel>
+          <StepLabel>{t("checkout.steps.billing")}</StepLabel>
         </Step>
         <Step>
-          <StepLabel>Payment</StepLabel>
+          <StepLabel>{t("checkout.steps.payment")}</StepLabel>
         </Step>
       </Stepper>
       <Box>
@@ -116,7 +118,7 @@ const Checkout = () => {
                     }}
                     onClick={() => setActiveStep(activeStep - 1)}
                   >
-                    Back
+                    {t("checkout.buttons.back")}
                   </Button>
                 )}
                 <Button
@@ -131,7 +133,9 @@ const Checkout = () => {
                     padding: "15px 40px",
                   }}
                 >
-                  {!isSecondStep ? "Next" : "Place Order"}
+                  {!isSecondStep
+                    ? t("checkout.buttons.next")
+                    : t("checkout.buttons.placeOrder")}
                 </Button>
               </Box>
             </form>
