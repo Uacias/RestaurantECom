@@ -28,7 +28,7 @@ const Carousel = () => {
             position: "absolute",
             top: "50%",
             left: "0",
-            zIndex: "1",
+            zIndex: "11",
           }}
         >
           <ArrowLefttIcon sx={{ fontSize: "48px", fill: "white" }} />
@@ -41,21 +41,21 @@ const Carousel = () => {
             position: "absolute",
             top: "50%",
             right: "10px",
-            zIndex: "1",
+            zIndex: "11",
           }}
         >
           <ArrowRightIcon sx={{ fontSize: "48px", fill: "white" }} />
         </IconButton>
       )}
     >
-      {Object.values(images).map((texture, index) => (
+      {Object.values(images).map((_src, index) => (
         <Box key={`img_carousel_${index}`}>
           <img
-            src={texture}
+            src={_src}
             alt={`img_carousel_${index}`}
             style={{
               width: "100%",
-              height: "550px",
+              height: "450px",
               objectFit: "cover",
             }}
           />

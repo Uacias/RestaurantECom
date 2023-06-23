@@ -21,7 +21,7 @@ const Footer = () => {
   const isMobile = useMediaQuery("(max-width: 630px)");
   const buttonStyles = {
     color: "white",
-    fontSize: "20px",
+    fontSize: isMobile ? "18px" : "20px",
     m: isMobile ? 1 : 3,
     textShadow: " 2px 2px 5px green",
   };
@@ -48,7 +48,7 @@ const Footer = () => {
             <Typography
               textAlign={"center"}
               sx={{
-                fontSize: isMobile ? "36px" : "64px",
+                fontSize: isMobile ? "28px" : "64px",
                 textShadow: " 2px 2px 5px green",
               }}
             >
