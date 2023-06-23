@@ -33,10 +33,10 @@ const Ratings = () => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ textAlign: "center", m: "40px auto", widt: "75%" }}>
+    <Box sx={{ textAlign: "center", m: "0 auto" }}>
       <Typography
-        variant="h2"
-        sx={{ textAlign: "center", marginBlock: "16px", fontWeight: "bold" }}
+        variant="h1"
+        sx={{ mb: 3, textAlign: "center", fontWeight: "bold" }}
       >
         {t("pages.about.tabs.famousGuests.title")}
       </Typography>

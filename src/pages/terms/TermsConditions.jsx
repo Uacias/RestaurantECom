@@ -24,7 +24,7 @@ const TermsConditions = () => {
         }}
       >
         <Typography
-          variant="h2"
+          variant="h1"
           sx={{ textAlign: "center", fontWeight: "bold" }}
         >
           {t("navigation.termsConditions")}

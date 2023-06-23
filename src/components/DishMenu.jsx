@@ -10,47 +10,36 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-
 import Dish from "./Dish";
 import { useTranslation } from "react-i18next";
 
 const DishMenu = () => {
   const { t, i18n } = useTranslation();
   const dishes = useSelector((state) => state.basket.items);
-
-  const options = dishes.map((dish) => {
-    const category = t(`dishMenu.${dish.attributes.category}`);
-    const name =
-      i18n.language === "pl" ? dish.attributes.namePL : dish.attributes.name;
-    return {
-      firstLetter: dish.attributes.category[0],
-      category: category,
-      label: name,
-    };
-  });
   const [searchValue, setSearchValue] = useState(null);
   const [categoryValue, setCategoryValue] = useState("all");
   const dispatch = useDispatch();
-  const isMobile = useMediaQuery("(max-width:1000px)");
-  const handleChange = (event, newValue) => {
-    setCategoryValue(newValue);
-    setSearchValue(null);
-  };
+  const isMobile = useMediaQuery("(max-width:1025px)");
 
-  async function getDishList() {
-    const dishes = await fetch(
+  const getDishList = async () => {
+    const response = await fetch(
       "http://localhost:1337/api/dishes?populate=image"
     );
-    const dishesJson = await dishes.json();
-    dispatch(setItems(dishesJson.data));
-    console.log(dishesJson.data);
-  }
+    const data = await response.json();
+    dispatch(setItems(data.data));
+  };
 
   useEffect(() => {
     getDishList();
   }, []);
 
+  const dishesForAutocomplete = dishes.map((dish) => ({
+    label:
+      i18n.language === "pl" ? dish.attributes.namePL : dish.attributes.name,
+  }));
+
   const menuCategoriesItems = {
+    all: dishes,
     appetizer: dishes.filter((e) => e.attributes.category === "appetizer"),
     soup: dishes.filter((e) => e.attributes.category === "soup"),
     burger: dishes.filter((e) => e.attributes.category === "burger"),
@@ -60,103 +49,86 @@ const DishMenu = () => {
     dessert: dishes.filter((e) => e.attributes.category === "dessert"),
   };
 
+  const filteredItems = menuCategoriesItems[categoryValue] || [];
+
+  const handleChange = (event, newValue) => {
+    setCategoryValue(newValue);
+    setSearchValue(null);
+  };
+
+  const renderDishes = () => {
+    if (searchValue) {
+      return dishes.filter((dish) => {
+        const name =
+          i18n.language === "pl"
+            ? dish.attributes.namePL
+            : dish.attributes.name;
+        return name === searchValue.label;
+      });
+    }
+    return filteredItems;
+  };
+
   return (
     <Box width="75%" margin="40px auto">
-      <Typography variant="h2" textAlign="center">
+      <Typography variant="h1" textAlign="center" fontWeight="bold">
         {t("dishMenu.title")}
       </Typography>
+
       <Box sx={{ display: "flex", justifyContent: "center", mt: "16px" }}>
         <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          autoHighlight
-          options={options.sort((a, b) =>
-            a.firstLetter.localeCompare(b.firstLetter)
+          sx={{ width: isMobile ? "250px" : "350px" }}
+          renderInput={(params) => (
+            <TextField {...params} label={t("dishMenu.searchLabel")} />
           )}
-          groupBy={(option) => option.category.toUpperCase()}
-          getOptionLabel={(option) => option.label}
+          disablePortal
+          autoHighlight
+          options={dishesForAutocomplete}
           value={searchValue}
           isOptionEqualToValue={(option, value) => option.label === value.label}
           onChange={(event, newValue) => {
             setSearchValue(newValue);
           }}
-          sx={{
-            width: useMediaQuery("(min-width:450px)") ? "300px" : "200px",
-          }}
-          renderInput={(params) => (
-            <TextField {...params} label={t("dishMenu.searchLabel")} />
-          )}
         />
       </Box>
 
-      <Tabs
-        value={categoryValue}
-        onChange={handleChange}
-        centered
-        TabIndicatorProps={{ sx: { display: isMobile ? "none" : "block" } }}
-        sx={{
-          m: "12px",
-          "& .MuiTabs-flexContainer": {
-            flexWrap: "wrap",
-          },
-        }}
-      >
-        <Tab label={t("dishMenu.all")} value="all" />
-        <Tab label={t("dishMenu.appetizer")} value="appetizer" />
-        <Tab label={t("dishMenu.soup")} value="soup" />
-        <Tab label={t("dishMenu.seafood")} value="seafood" />
-        <Tab label={t("dishMenu.pasta")} value="pasta" />
-        <Tab label={t("dishMenu.steak")} value="steak" />
-        <Tab label={t("dishMenu.burger")} value="burger" />
-        <Tab label={t("dishMenu.dessert")} value="dessert" />
-      </Tabs>
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <Tabs
+          value={categoryValue}
+          onChange={handleChange}
+          textColor="secondary"
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          sx={{
+            m: "24px",
+          }}
+        >
+          <Tab label={t("dishMenu.all")} value="all" />
+          <Tab label={t("dishMenu.appetizer")} value="appetizer" />
+          <Tab label={t("dishMenu.soup")} value="soup" />
+          <Tab label={t("dishMenu.seafood")} value="seafood" />
+          <Tab label={t("dishMenu.pasta")} value="pasta" />
+          <Tab label={t("dishMenu.steak")} value="steak" />
+          <Tab label={t("dishMenu.burger")} value="burger" />
+          <Tab label={t("dishMenu.dessert")} value="dessert" />
+        </Tabs>
+      </Box>
+
       <Box
-        sx={{ m: "0 auto", display: searchValue ? "flex" : "grid" }}
         margin="0 auto"
         display="grid"
         justifyContent="space-around"
-        gridTemplateColumns="repeat(auto-fill, 300px)"
-        rowGap="16px"
+        rowGap="32px"
+        columnGap="16px"
+        gridTemplateColumns={searchValue ? "1fr" : "repeat(auto-fill, 300px)"}
+        sx={{
+          placeItems: searchValue ? "center" : "unset",
+        }}
       >
-        {searchValue
-          ? dishes
-              .filter((dish) => dish.attributes.name === searchValue.label)
-              .map((dish) => (
-                <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-              ))
-          : categoryValue === "all"
-          ? dishes.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "appetizer"
-          ? menuCategoriesItems.appetizer.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "soup"
-          ? menuCategoriesItems.soup.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "seafood"
-          ? menuCategoriesItems.seafood.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "pasta"
-          ? menuCategoriesItems.pasta.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "steak"
-          ? menuCategoriesItems.steak.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "burger"
-          ? menuCategoriesItems.burger.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : categoryValue === "dessert"
-          ? menuCategoriesItems.dessert.map((dish) => (
-              <Dish dish={dish} key={`${dish.name}_${dish.id}`}></Dish>
-            ))
-          : null}
+        {renderDishes().map((dish) => (
+          <Dish dish={dish} key={`${dish.name}_${dish.id}`} />
+        ))}
       </Box>
     </Box>
   );

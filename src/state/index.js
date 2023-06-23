@@ -34,6 +34,10 @@ export const basketSlice = createSlice({
       state.basket = state.basket.filter((e) => e.id !== action.payload.id);
     },
 
+    removeAllFromBasket(state, action) {
+      state.basket = [];
+    },
+
     increaseCount(state, action) {
       state.basket = state.basket.map((e) => {
         if (e.id === action.payload.id) e.count++;
@@ -53,6 +57,7 @@ export const basketSlice = createSlice({
 export const {
   addToBasket,
   removeFromBasket,
+  removeAllFromBasket,
   setIsBasketVisible,
   setItems,
   increaseCount,

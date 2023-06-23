@@ -2,9 +2,10 @@ import { Box, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const CheckoutFailure = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <Box
       m="90px auto"
@@ -18,9 +19,11 @@ const CheckoutFailure = () => {
       }}
     >
       <Alert severity="error" sx={{ fontSize: "1.2rem" }}>
-        <AlertTitle sx={{ fontSize: "1.5rem" }}>Failure</AlertTitle>
-        There was an error while finalizing payement. <br />
-        <strong>We apologize for the inconvenience</strong>
+        <AlertTitle sx={{ fontSize: "1.5rem" }}>
+          {t("finalizedPaymentFailureTitle")}
+        </AlertTitle>
+        {t("finalizedPaymentFailureContent")} <br />
+        <strong>{t("finalizedPaymentFailureApology")}</strong>
       </Alert>
       <Button
         fullWidth
@@ -39,7 +42,7 @@ const CheckoutFailure = () => {
           navigate("/");
         }}
       >
-        Return Home
+        {t("checkout.returnHome")}
       </Button>
     </Box>
   );

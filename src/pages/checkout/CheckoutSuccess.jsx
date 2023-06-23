@@ -2,8 +2,9 @@ import { Box, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const CheckoutSuccess = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <Box
@@ -18,9 +19,11 @@ const CheckoutSuccess = () => {
       }}
     >
       <Alert severity="success" sx={{ fontSize: "1.2rem" }}>
-        <AlertTitle sx={{ fontSize: "1.5rem" }}>Success</AlertTitle>
-        You have finalized your purchase. <br />
-        <strong> Thank you for choosing Le Nemours</strong>
+        <AlertTitle sx={{ fontSize: "1.5rem" }}>
+          {t("addToBasketAlertTitle")}
+        </AlertTitle>
+        {t("finalizedPayment")} <br />
+        <strong> {t("finalizedPaymentThanks")}</strong>
       </Alert>
       <Button
         fullWidth
@@ -39,7 +42,7 @@ const CheckoutSuccess = () => {
           navigate("/");
         }}
       >
-        Return Home
+        {t("checkout.returnHome")}
       </Button>
     </Box>
   );
