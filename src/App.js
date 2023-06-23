@@ -11,6 +11,8 @@ import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
 import TermsConditions from "./pages/terms/TermsConditions";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
 import CheckoutFailure from "./pages/checkout/CheckoutFailure";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
 const ScrollTop = () => {
   const { pathname } = useLocation();
@@ -22,24 +24,27 @@ const ScrollTop = () => {
 
 function App() {
   return (
-    <div className="app">
-      <BrowserRouter>
-        <NavigationBar />
-        <ScrollTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Checkout" element={<Checkout />} />
-          <Route path="checkout/success" element={<CheckoutSuccess />} />
-          <Route path="checkout/failure" element={<CheckoutFailure />} />
-          <Route path="/About" element={<AboutUs />} />
-          <Route path="/Contact" element={<ContactHours />} />
-          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-          <Route path="/TermsAndConditions" element={<TermsConditions />} />
-        </Routes>
-        <BasketMenu />
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="app">
+        <BrowserRouter>
+          <NavigationBar />
+          <ScrollTop />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Home />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="checkout/success" element={<CheckoutSuccess />} />
+            <Route path="checkout/failure" element={<CheckoutFailure />} />
+            <Route path="/About" element={<AboutUs />} />
+            <Route path="/Contact" element={<ContactHours />} />
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/TermsAndConditions" element={<TermsConditions />} />
+          </Routes>
+          <BasketMenu />
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 

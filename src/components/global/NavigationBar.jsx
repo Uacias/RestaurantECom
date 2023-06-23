@@ -74,7 +74,7 @@ const NavigationBar = () => {
         position="fixed"
         top="0"
         left="0"
-        zIndex="1"
+        zIndex="111"
         display="flex"
       >
         <Box
@@ -108,17 +108,6 @@ const NavigationBar = () => {
             >
               Le Nemours
             </Typography>
-          </Tooltip>
-          <Tooltip title="Home">
-            <IconButton
-              size="large"
-              color="inherit"
-              aria-label="home"
-              sx={{ display: isSmallMobile ? "block" : "none" }}
-              onClick={() => navigate("")}
-            >
-              <HomeIcon sx={{ fontSize: "28px" }} />
-            </IconButton>
           </Tooltip>
         </Box>
 
@@ -210,20 +199,6 @@ const NavigationBar = () => {
             </Typography>
           </Box>
 
-          <Tooltip title={t("navigation.tooltips.basket")}>
-            <IconButton
-              size="large"
-              color="inherit"
-              aria-label="basket"
-              onClick={() => {
-                dispatch(setIsBasketVisible({}));
-              }}
-            >
-              <Badge badgeContent={basket.length} showZero max={99}>
-                <ShoppingBasketIcon fontSize="28px" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
           <Tooltip title={t("navigation.tooltips.switchLanguage")}>
             <FormControlLabel
               control={
@@ -239,6 +214,20 @@ const NavigationBar = () => {
               }
               label={selectedLanguage.toUpperCase()}
             />
+          </Tooltip>
+          <Tooltip title={t("navigation.tooltips.basket")}>
+            <IconButton
+              size="large"
+              color="inherit"
+              aria-label="basket"
+              onClick={() => {
+                dispatch(setIsBasketVisible({}));
+              }}
+            >
+              <Badge badgeContent={basket.length} showZero max={99}>
+                <ShoppingBasketIcon fontSize="28px" />
+              </Badge>
+            </IconButton>
           </Tooltip>
         </Box>
       </Box>

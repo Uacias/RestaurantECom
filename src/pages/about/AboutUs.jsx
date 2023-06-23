@@ -56,8 +56,13 @@ const AboutUs = () => {
         }}
       >
         <Tabs value={value} onChange={handleChange}>
-          <Tab label={t("pages.about.tabs.ourStory.title")} {...a11yProps(0)} />
           <Tab
+            sx={{ fontSize: "14px" }}
+            label={t("pages.about.tabs.ourStory.title")}
+            {...a11yProps(0)}
+          />
+          <Tab
+            sx={{ fontSize: "14px" }}
             label={t("pages.about.tabs.famousGuests.title")}
             {...a11yProps(1)}
           />

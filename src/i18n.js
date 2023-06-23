@@ -19,8 +19,12 @@ i18n
     resources: {
       en: {
         translation: {
+          stepper: {
+            progress: "Progress",
+          },
           checkout: {
-            contactInfo: "Dane Kontaktowe",
+            returnHome: "Return Home",
+            contactInfo: "Contact Data",
             label: {
               sameForShipping: "Same Shipping Data",
             },
@@ -41,7 +45,7 @@ i18n
               firstName: "First Name",
               lastName: "Last Name",
               country: "Country",
-              streetAddress: "Street Address",
+              street: "Street Address",
               city: "City",
               state: "State",
               zipCode: "Zip Code",
@@ -51,7 +55,17 @@ i18n
               phoneNumber: "Phone Number",
             },
           },
+          clearBasket: "Remove all",
           addToBasket: "Add to basket",
+          addToBasketAlertTitle: "Success",
+          addToBasketAlertContent: "You've just added a product to the basket",
+          finalizedPayment: " You have finalized your purchase.",
+          finalizedPaymentThanks: "Thank you for choosing Le Nemours.",
+          finalizedPaymentFailureTitle: "Failure",
+          finalizedPaymentFailureContent:
+            "There was an error while finalizing payement.",
+          finalizedPaymentFailureApology: "We are sorry for the inconvenience.",
+
           dishMenu: {
             title: "Check Our Menu",
             searchLabel: "Search for products...",
@@ -193,7 +207,11 @@ i18n
       },
       pl: {
         translation: {
+          stepper: {
+            progress: "Postęp",
+          },
           checkout: {
+            returnHome: "Powrót do strony głównej",
             contactInfo: "Dane Kontaktowe",
 
             label: {
@@ -216,7 +234,7 @@ i18n
               firstName: "Imię",
               lastName: "Nazwisko",
               country: "Kraj",
-              streetAddress: "Adres",
+              street: "Adres",
               city: "Miasto",
               state: "Województwo",
               zipCode: "Kod pocztowy",
@@ -226,7 +244,16 @@ i18n
               phoneNumber: "Numer Telefonu",
             },
           },
+          clearBasket: "Usuń wszystko",
           addToBasket: "Dodaj do koszyka",
+          addToBasketAlertTitle: "Sukces!",
+          addToBasketAlertContent: "Właśnie dodałes produkt do koszyka",
+          finalizedPayment: "Poprawnie dokonano płatności.",
+          finalizedPaymentThanks: "Dziękujemy za wybranie Le Nemours.",
+          finalizedPaymentFailureTitle: "Błąd!",
+          finalizedPaymentFailureContent:
+            "Wystąpił błąd podczas dokonywania płatności.",
+          finalizedPaymentFailureApology: "Przepraszamy za niedogodności.",
           dishMenu: {
             title: "Sprawdź Nasze Menu",
             searchLabel: "Szukaj produktów...",

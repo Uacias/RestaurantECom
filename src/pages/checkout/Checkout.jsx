@@ -1,78 +1,101 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import * as yup from "yup";
-import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
-import { Formik } from "formik";
-import Payment from "../../components/Payment";
-import Shipping from "../../components/Shipping";
-import { loadStripe } from "@stripe/stripe-js";
 import { useTranslation } from "react-i18next";
+import {
+  Box,
+  Button,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
-const stripePromise = loadStripe(
-  "pk_test_51MNz5KFJcWLRGDqbgsy0gn50Qv7NkHACvdCXTIIxqwv2BmDpB6f5p0GLKLOW7nDUViQhIUK9HEImM1AGz2hHGpGn00LgjWGGBw"
-);
+import { Formik } from "formik";
+
+import { checkoutSchema, initialValues, stripePromise } from "./CheckoutData";
+import Payment from "./Payment";
+import Shipping from "./Shipping";
 
 const Checkout = () => {
   const { t } = useTranslation();
-  const [activeStep, setActiveStep] = useState(0);
+
+  const isMobile = useMediaQuery("(max-width:525px)");
+
   const basket = useSelector((state) => state.basket.basket);
-  const isFirstStep = activeStep === 0;
-  const isSecondStep = activeStep === 1;
+  const [currentStep, setCurrentStep] = useState(0);
+  const isStep = (step) => currentStep === step;
+  const stepOne = isStep(0);
+  const stepTwo = isStep(1);
 
   const handleFormSubmit = async (values, actions) => {
-    setActiveStep(activeStep + 1);
-
-    //billing addres to shipping address
-    if (isFirstStep && values.shippingAddress.isSameAddress) {
-      actions.setFieldValue("shippingAddress", {
-        ...values.shippingAddress,
-        isSameAddress: true,
-      });
-    }
-    if (isSecondStep) {
+    setCurrentStep(currentStep + 1);
+    if (stepTwo) {
       makePayment(values);
     }
-
     actions.setTouched({});
   };
 
-  async function makePayment(values) {
+  const makePayment = async (values) => {
     const stripe = await stripePromise;
-    const requestBody = {
-      userName: [values.firstName, values.lastName].join(" "),
-      email: values.email,
-      products: basket.map(({ id, count }) => ({
-        id,
-        count,
-      })),
-    };
+    const { firstName, lastName, email } = values;
+    const userName = [firstName, lastName].join(" ");
 
     const response = await fetch("http://localhost:1337/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({
+        userName,
+        email,
+        products: basket.map(({ id, count }) => ({ id, count })),
+      }),
     });
+
     const session = await response.json();
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
-  }
+  };
+
+  const StepperComponent = (
+    <Stepper
+      activeStep={currentStep}
+      sx={{
+        m: "25px 0",
+        alignItems: isMobile ? "center" : "",
+      }}
+      orientation={isMobile ? "vertical" : "horizontal"}
+    >
+      <Step>
+        <StepLabel>
+          <Typography sx={{ fontSize: "16px" }}>
+            {t("checkout.steps.shipping")}
+          </Typography>
+        </StepLabel>
+      </Step>
+      <Step>
+        <StepLabel>
+          <Typography sx={{ fontSize: "16px" }}>
+            {t("checkout.steps.payment")}
+          </Typography>
+        </StepLabel>
+      </Step>
+    </Stepper>
+  );
 
   return (
-    <Box width="80%" m="100px auto">
-      <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
-        <Step>
-          <StepLabel>{t("checkout.steps.billing")}</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>{t("checkout.steps.payment")}</StepLabel>
-        </Step>
-      </Stepper>
+    <Box width="90%" m="120px auto">
+      <Typography variant="h4" sx={{ textAlign: "center" }}>
+        {t("stepper.progress")}
+      </Typography>
+      {StepperComponent}
       <Box>
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
-          validationSchema={checkoutSchema[activeStep]}
+          validationSchema={checkoutSchema[currentStep]}
         >
           {({
             values,
@@ -84,7 +107,7 @@ const Checkout = () => {
             setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
-              {isFirstStep && (
+              {stepOne && (
                 <Shipping
                   values={values}
                   errors={errors}
@@ -94,7 +117,7 @@ const Checkout = () => {
                   setFieldValue={setFieldValue}
                 />
               )}
-              {isSecondStep && (
+              {stepTwo && (
                 <Payment
                   values={values}
                   errors={errors}
@@ -105,35 +128,29 @@ const Checkout = () => {
                 />
               )}
               <Box display="flex" justifyContent="space-between" gap="50px">
-                {!isFirstStep && (
+                {!stepOne && (
                   <Button
+                    onClick={() => setCurrentStep(currentStep - 1)}
+                    sx={{
+                      p: "15px 40px",
+                    }}
                     fullWidth
                     color="primary"
                     variant="contained"
-                    sx={{
-                      boxShadow: "none",
-                      color: "white",
-                      borderRadius: 0,
-                      padding: "15px 40px",
-                    }}
-                    onClick={() => setActiveStep(activeStep - 1)}
                   >
                     {t("checkout.buttons.back")}
                   </Button>
                 )}
                 <Button
+                  sx={{
+                    p: "15px 40px",
+                  }}
                   fullWidth
                   type="submit"
                   color="primary"
                   variant="contained"
-                  sx={{
-                    boxShadow: "none",
-                    color: "white",
-                    borderRadius: 0,
-                    padding: "15px 40px",
-                  }}
                 >
-                  {!isSecondStep
+                  {!stepTwo
                     ? t("checkout.buttons.next")
                     : t("checkout.buttons.placeOrder")}
                 </Button>
@@ -147,80 +164,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-const initialValues = {
-  billingAddress: {
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  email: "",
-  phoneNumber: "",
-};
-
-const checkoutSchema = [
-  yup.object().shape({
-    billingAddress: yup.object().shape({
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
-      street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
-    }),
-    shippingAddress: yup.object().shape({
-      isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      lastName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      country: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street1: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      state: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      zipCode: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-    }),
-  }),
-  yup.object().shape({
-    email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
-  }),
-];

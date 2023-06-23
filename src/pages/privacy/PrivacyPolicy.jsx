@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
         }}
       >
         <Typography
-          variant="h2"
+          variant="h1"
           sx={{ textAlign: "center", fontWeight: "bold" }}
         >
           {t("navigation.privacyPolicy")}

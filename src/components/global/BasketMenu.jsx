@@ -5,8 +5,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromBasket, setIsBasketVisible } from "../../state";
-import { decreaseCount, increaseCount } from "../../state";
+import {
+  removeFromBasket,
+  setIsBasketVisible,
+  removeAllFromBasket,
+  decreaseCount,
+  increaseCount,
+} from "../../state";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -25,14 +30,33 @@ const BasketMenu = () => {
     return str.length > 35 ? str.slice(0, 35) + "..." : str;
   };
 
+  const handleCloseDrawer = () => {
+    dispatch(setIsBasketVisible());
+  };
+
+  const handleCheckout = () => {
+    dispatch(setIsBasketVisible({}));
+    navigate("/checkout");
+  };
+
+  const handleRemoveAllFromBasket = () => {
+    dispatch(removeAllFromBasket());
+  };
+
+  const handleDecreaseCount = (id) => {
+    dispatch(decreaseCount({ id }));
+  };
+
+  const handleIncreaseCount = (id) => {
+    dispatch(increaseCount({ id }));
+  };
+
+  const handleRemoveFromBasket = (id) => {
+    dispatch(removeFromBasket({ id }));
+  };
+
   return (
-    <Drawer
-      anchor="right"
-      open={isBasketVisible}
-      onClose={() => {
-        dispatch(setIsBasketVisible());
-      }}
-    >
+    <Drawer anchor="right" open={isBasketVisible} onClose={handleCloseDrawer}>
       <Box p={2} width="320px" role="presentation">
         {/* TOP */}
         <Box
@@ -52,9 +76,7 @@ const BasketMenu = () => {
           <IconButton
             color="inherit"
             aria-label="Hide"
-            onClick={() => {
-              dispatch(setIsBasketVisible());
-            }}
+            onClick={handleCloseDrawer}
             sx={{
               p: 1,
             }}
@@ -62,18 +84,80 @@ const BasketMenu = () => {
             <ArrowForwardIcon sx={{ fontSize: 32 }} />
           </IconButton>
         </Box>
+        {/* CORE ACTIONS*/}
+        {basket.length > 0 ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography variant="h4" mt={2} fontWeight="bold">
+              {t("basket.total")}
+            </Typography>
+            <Typography variant="h4" mt={1} fontWeight="bold">
+              {`$${total.toFixed(2)}`}
+            </Typography>
+
+            <Button
+              fullWidth
+              type="submit"
+              color="success"
+              variant="contained"
+              sx={{
+                boxShadow: "none",
+                color: "white",
+                borderRadius: 0,
+                padding: "15px 40px",
+                mt: 2,
+              }}
+              onClick={handleCheckout}
+            >
+              {t("basket.checkout")}
+            </Button>
+            <Button
+              fullWidth
+              type="submit"
+              color="error"
+              variant="contained"
+              sx={{
+                boxShadow: "none",
+                color: "white",
+                borderRadius: 0,
+                padding: "15px 40px",
+                mt: 1,
+              }}
+              onClick={handleRemoveAllFromBasket}
+            >
+              {t("clearBasket")}
+            </Button>
+          </Box>
+        ) : (
+          <Box sx={{ mt: 3 }}>
+            <Typography variant="h5">{t("basket.empty")}</Typography>
+          </Box>
+        )}
 
         {/* INDIVIDUAL DISH ORDER */}
         <Box>
           {basket.map((dish) => {
+            const dishImage =
+              dish?.attributes?.image?.data?.attributes?.formats?.medium?.url;
+            const dishName =
+              i18n.language === "pl"
+                ? dish.attributes.namePL
+                : dish.attributes.name;
+            const dishPrice = (dish.attributes.price * dish.count).toFixed(2);
+
             return (
               <Box
+                key={`${dish.id}_${dish.attributes.name}`}
                 sx={{
                   mt: 3,
                   border: "1px solid black",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  backgroundImage: `url(http://localhost:1337${dish?.attributes?.image?.data?.attributes?.formats?.medium?.url})`,
+                  backgroundImage: `url(http://localhost:1337${dishImage})`,
                 }}
               >
                 <Box
@@ -90,14 +174,9 @@ const BasketMenu = () => {
                     }}
                     variant="h5"
                   >
-                    {truncateString(
-                      i18n.language === "pl"
-                        ? dish.attributes.namePL
-                        : dish.attributes.name
-                    )}
+                    {truncateString(dishName)}
                   </Typography>
                   <Box
-                    key={`${dish.id}_${dish.attributes.name}`}
                     sx={{
                       p: 2,
                       display: "flex",
@@ -117,9 +196,7 @@ const BasketMenu = () => {
                         <Tooltip title={t("basket.tooltips.decrease")}>
                           <IconButton
                             sx={{ background: "rgba(0,0,0,.3)" }}
-                            onClick={() => {
-                              dispatch(decreaseCount({ id: dish.id }));
-                            }}
+                            onClick={() => handleDecreaseCount(dish.id)}
                           >
                             <RemoveIcon
                               sx={{
@@ -142,9 +219,7 @@ const BasketMenu = () => {
                         <Tooltip title={t("basket.tooltips.increase")}>
                           <IconButton
                             sx={{ background: "rgba(0,0,0,.3)" }}
-                            onClick={() => {
-                              dispatch(increaseCount({ id: dish.id }));
-                            }}
+                            onClick={() => handleIncreaseCount(dish.id)}
                           >
                             <AddIcon sx={{ fontSize: 26 }} />
                           </IconButton>
@@ -158,9 +233,7 @@ const BasketMenu = () => {
                             backgroundColor: "rgba(0,0,0, .3)",
                             borderRadius: "50%",
                           }}
-                          onClick={() => {
-                            dispatch(removeFromBasket({ id: dish.id }));
-                          }}
+                          onClick={() => handleRemoveFromBasket(dish.id)}
                         >
                           <DeleteIcon
                             sx={{
@@ -184,53 +257,13 @@ const BasketMenu = () => {
                     textAlign={"center"}
                     sx={{ pb: 2, fontWeight: "bold" }}
                   >
-                    {`$${(dish.attributes.price * dish.count).toFixed(2)}`}
+                    {`$${dishPrice}`}
                   </Typography>
                 </Box>
               </Box>
             );
           })}
         </Box>
-        {/* CHECKOUT BUTTON*/}
-        {basket.length > 0 ? (
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography variant="h5" mt={6} fontWeight="bold">
-              {t("basket.total")}
-            </Typography>
-            <Typography variant="h5" mt={1} fontWeight="bold">
-              {`$${total.toFixed(2)}`}
-            </Typography>
-
-            <Button
-              fullWidth
-              type="submit"
-              color="primary"
-              variant="contained"
-              sx={{
-                boxShadow: "none",
-                color: "white",
-                borderRadius: 0,
-                padding: "15px 40px",
-                mt: 2,
-              }}
-              onClick={() => {
-                dispatch(setIsBasketVisible({}));
-                navigate("/checkout");
-              }}
-            >
-              {t("basket.checkout")}
-            </Button>
-          </Box>
-        ) : (
-          <Box sx={{ mt: 3 }}>
-            <Typography variant="h5">{t("basket.empty")}</Typography>
-          </Box>
-        )}
       </Box>
       {/* BASKET END */}
     </Drawer>
