@@ -33,7 +33,7 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basket);
   const isMobile = useMediaQuery("(max-width:768px)");
-  const isSmallMobile = useMediaQuery("(max-width:334px)");
+  const isSmallMobile = useMediaQuery("(max-width:430px)");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
 

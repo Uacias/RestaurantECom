@@ -19,6 +19,12 @@ i18n
     resources: {
       en: {
         translation: {
+          carousel: {
+            firstSlideDescription: "Welcome to Le Nemours!",
+            secondSlideDescription: "Exquisite Culinary Delights",
+            thirdSlideDescription: "Passion in Every Dish",
+            fourthSlideDescription: "Unforgettable Dining Experience",
+          },
           stepper: {
             progress: "Progress",
           },
@@ -207,6 +213,12 @@ i18n
       },
       pl: {
         translation: {
+          carousel: {
+            firstSlideDescription: "Witamy w Le Nemours!",
+            secondSlideDescription: "Wykwintne Smaki Kulinarne",
+            thirdSlideDescription: "Pasja w Każdym Daniu",
+            fourthSlideDescription: "Niezapomniane Doznania Kulinarne",
+          },
           stepper: {
             progress: "Postęp",
           },
